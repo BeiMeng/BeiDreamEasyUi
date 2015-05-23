@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EECE9B01-394B-4B1A-964A-6D9DCEF14FA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Util</RootNamespace>
+    <AssemblyName>Util.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="00-Extensions.Convert.cs" />
+    <Compile Include="00-Extensions.DateTime.cs" />
+    <Compile Include="00-Extensions.Enum.cs" />
+    <Compile Include="00-Extensions.Expression.cs" />
+    <Compile Include="00-Extensions.Format.cs" />
+    <Compile Include="00-Extensions.Helper.cs" />
+    <Compile Include="00-Extensions.Nullable.cs" />
+    <Compile Include="00-Extensions.Validate.cs" />
+    <Compile Include="00-Extensions.ValidationAttribute.cs" />
+    <Compile Include="Caches\CacheManagerBase.cs" />
+    <Compile Include="Caches\CacheProviderBase.cs" />
+    <Compile Include="Caches\DefaultCacheKey.cs" />
+    <Compile Include="Caches\DefaultCacheManager.cs" />
+    <Compile Include="Caches\ICacheConfig.cs" />
+    <Compile Include="Caches\ICacheKey.cs" />
+    <Compile Include="Caches\ICacheManager.cs" />
+    <Compile Include="Caches\ICacheProvider.cs" />
+    <Compile Include="Caches\LocalCacheProvider.cs" />
+    <Compile Include="Compress\GZip.cs" />
+    <Compile Include="Compress\ICompress.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="Contexts\IContext.cs" />
+    <Compile Include="Contexts\WebContext.cs" />
+    <Compile Include="Contexts\WindowsContext.cs" />
+    <Compile Include="Conv.cs" />
+    <Compile Include="Datas\IUnitOfWork.cs" />
+    <Compile Include="Encrypt.cs" />
+    <Compile Include="Enum.cs" />
+    <Compile Include="Exceptions\ConcurrencyException.cs" />
+    <Compile Include="Exports\ExcelExport.cs" />
+    <Compile Include="Exports\ExportBase.cs" />
+    <Compile Include="Exports\ExportFormat.cs" />
+    <Compile Include="Exports\IExport.cs" />
+    <Compile Include="Exports\IExportFactory.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="File.FileInfo.cs" />
+    <Compile Include="File.Path.cs" />
+    <Compile Include="File.Stream.Convert.cs" />
+    <Compile Include="File.Stream.cs" />
+    <Compile Include="Files\DefaultUploadPathStrategy.cs" />
+    <Compile Include="Files\FileInfo.cs" />
+    <Compile Include="Files\FileManager.cs" />
+    <Compile Include="Files\FileSize.cs" />
+    <Compile Include="Files\FileUnit.cs" />
+    <Compile Include="Files\FileUpload.cs" />
+    <Compile Include="Files\IFileManager.cs" />
+    <Compile Include="Files\IFileUpload.cs" />
+    <Compile Include="Files\IUploadPathStrategy.cs" />
+    <Compile Include="Format.cs" />
+    <Compile Include="IDependency.cs" />
+    <Compile Include="Image.cs" />
+    <Compile Include="Images\ImageInfo.cs" />
+    <Compile Include="INullObject.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Lambda.cs" />
+    <Compile Include="Lambdas\Dynamics\ClassFactory.cs" />
+    <Compile Include="Lambdas\Dynamics\DynamicClass.cs" />
+    <Compile Include="Lambdas\Dynamics\DynamicExpression.cs" />
+    <Compile Include="Lambdas\Dynamics\DynamicOrdering.cs" />
+    <Compile Include="Lambdas\Dynamics\DynamicProperty.cs" />
+    <Compile Include="Lambdas\Dynamics\DynamicQueryable.cs" />
+    <Compile Include="Lambdas\Dynamics\ExpressionParser.cs" />
+    <Compile Include="Lambdas\Dynamics\ParseException.cs" />
+    <Compile Include="Lambdas\Dynamics\Res.cs" />
+    <Compile Include="Lambdas\Dynamics\Signature.cs" />
+    <Compile Include="Lambdas\ExpressionBuilder.cs" />
+    <Compile Include="Lambdas\ParameterRebinder.cs" />
+    <Compile Include="Logs\Formats\BusinessFormatter.cs" />
+    <Compile Include="Logs\Formats\CaptionFormatter.cs" />
+    <Compile Include="Logs\Formats\ClassFormatter.cs" />
+    <Compile Include="Logs\Formats\ContentFormatter.cs" />
+    <Compile Include="Logs\Formats\ErrorFormatter.cs" />
+    <Compile Include="Logs\Formats\FormatterBase.cs" />
+    <Compile Include="Logs\Formats\IpFormatter.cs" />
+    <Compile Include="Logs\Formats\LogMessageFormatter.cs" />
+    <Compile Include="Logs\Formats\SqlFormatter.cs" />
+    <Compile Include="Logs\Formats\SqlParamsFormatter.cs" />
+    <Compile Include="Logs\Formats\StackTraceFormatter.cs" />
+    <Compile Include="Logs\Formats\TitleFormatter.cs" />
+    <Compile Include="Logs\Formats\UrlFormatter.cs" />
+    <Compile Include="Logs\Formats\UserFormatter.cs" />
+    <Compile Include="Logs\ILog.cs" />
+    <Compile Include="Logs\LogLevel.cs" />
+    <Compile Include="Logs\LogMessage.cs" />
+    <Compile Include="Maps\IMap.cs" />
+    <Compile Include="Net.cs" />
+    <Compile Include="NullObject.cs" />
+    <Compile Include="Offices\Cell.cs" />
+    <Compile Include="Offices\CellStyle.cs" />
+    <Compile Include="Offices\Color.cs" />
+    <Compile Include="Offices\FillPattern.cs" />
+    <Compile Include="Offices\HorizontalAlignment.cs" />
+    <Compile Include="Offices\IExcel.cs" />
+    <Compile Include="Offices\IndexManager.cs" />
+    <Compile Include="Offices\IndexRange.cs" />
+    <Compile Include="Offices\NullCell.cs" />
+    <Compile Include="Offices\Range.cs" />
+    <Compile Include="Offices\Row.cs" />
+    <Compile Include="Offices\Table.cs" />
+    <Compile Include="Offices\VerticalAlignment.cs" />
+    <Compile Include="Operator.cs" />
+    <Compile Include="OrderByAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="R.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>R.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Random.cs" />
+    <Compile Include="RandomBuilder.cs" />
+    <Compile Include="Reflection.cs" />
+    <Compile Include="Regex.cs" />
+    <Compile Include="ResourceHelper.cs" />
+    <Compile Include="Serialize.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="Str.cs" />
+    <Compile Include="Str`.cs" />
+    <Compile Include="Sys.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="Tests\UnitTest.cs" />
+    <Compile Include="Thread.cs" />
+    <Compile Include="Time.cs" />
+    <Compile Include="Validations\DataAnnotations\DateAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\EqualToAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\IntegerAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\MaxAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\MinAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\MobilePhoneAttribute.cs" />
+    <Compile Include="Validations\DataAnnotations\ValidatorResources.Designer.cs" />
+    <Compile Include="Validations\IValidation.cs" />
+    <Compile Include="Validations\IValidationHandler.cs" />
+    <Compile Include="Validations\IValidationRule.cs" />
+    <Compile Include="Validations\Validation.cs" />
+    <Compile Include="Validations\Validation2.cs" />
+    <Compile Include="Validations\ValidationHandler.cs" />
+    <Compile Include="Validations\ValidationResultCollection.cs" />
+    <Compile Include="Warning.cs" />
+    <Compile Include="Wcf.cs" />
+    <Compile Include="Web.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="说明.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="R.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>R.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Validations\DataAnnotations\ValidatorResources.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

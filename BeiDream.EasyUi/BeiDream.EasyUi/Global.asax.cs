@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace BeiDream.EasyUi
@@ -16,9 +17,10 @@ namespace BeiDream.EasyUi
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);//错误拦截过滤器注册
+            RouteConfig.RegisterRoutes(RouteTable.Routes);//路由器注册
+            BundleConfig.RegisterBundles(BundleTable.Bundles);//打包压缩文件注册
         }
     }
 }

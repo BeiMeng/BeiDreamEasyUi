@@ -1,0 +1,26 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <link type="text/css" rel="stylesheet" href="/Scripts/EasyUi/themes/@ViewBag.Skin/easyui.css" />
+    @Styles.Render("~/Css/css")
+    <link type="text/css" rel="stylesheet" href="/Css/Icons-upload/icon.css" />
+    <link type="text/css" rel="stylesheet" href="/Scripts/WebUploader/webuploader.css" />
+    <script type="text/javascript" src="/Scripts/JQuery/jquery.min.js"></script>
+    <script type="text/javascript" src="/Scripts/EasyUi/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/Scripts/JQuery/jquery.json-2.4.min.js"></script>
+    <script type="text/javascript" src="/Scripts/WebUploader/webuploader.min.js"></script>
+    @Scripts.Render("~/Scripts/EasyUi/js")
+    @Scripts.Render("~/Scripts/Utils/js")
+    @RenderSection("head", false)
+</head>
+<body>
+    @RenderBody()
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

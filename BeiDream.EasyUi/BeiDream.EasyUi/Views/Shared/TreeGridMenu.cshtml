@@ -1,0 +1,14 @@
+﻿@{
+    var x = @Html.EasyUi();
+}
+@x.Menu( "menuGrid" ).Click( "$.easyui.fnClickTreeGridMenuItem" ).Duration( 600 ).Items(
+    x.MenuItem( "menuItem_AddToChild", "添加下级节点", "icon-add" ),
+    x.MenuItem( "menuItem_AddToBefore", "添加同级节点（上方）", "icon-addToUp" ),
+    x.MenuItem( "menuItem_AddToAfter", "添加同级节点（下方）", "icon-addToDown" ),
+    x.MenuItem( "menuItem_Edit", "编 辑", "icon-edit" ),
+    x.MenuItem( "menuItem_Delete", "删 除", "icon-delete" ),
+    x.MenuItem( "menuItem_MoveUp", "上 移", "icon-up" ),
+    x.MenuItem( "menuItem_MoveDown", "下 移", "icon-down" ),
+    x.MenuItem( "menuItem_FixSortId", "修正排序号", "icon-fix" ),
+    x.MenuItem( "menuItem_Refresh", "刷 新", "icon-refresh" )
+)

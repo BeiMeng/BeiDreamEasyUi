@@ -1,0 +1,33 @@
+﻿.icon-add{ background:url(icons/icons.png) no-repeat -100px 0; }
+.icon-add2 { background: url(icons/add.png) no-repeat center center; }
+.icon-add3 { background: url(icons/add_2.png) no-repeat center center; }
+.icon-add4{ background:url(icons/icons.png) no-repeat -20px 0; }
+.icon-addToUp{background:url(icons/icons.png) no-repeat -240px 0;}
+.icon-addToDown{background:url(icons/icons.png) no-repeat 0 -20px;}
+.icon-edit{ background:url(icons/icons.png) no-repeat -180px 0; }
+.icon-edit2 { background: url(icons/edit.png) no-repeat center center; }
+.icon-edit3 { background: url(icons/edit_2.png) no-repeat center center; }
+.icon-delete{ background:url(icons/icons.png) no-repeat -140px 0; }
+.icon-delete2 { background: url(icons/delete.png) no-repeat center center; }
+.icon-delete3{ background:url(icons/icons.png) no-repeat -140px -120px; }
+.icon-delete4{ background:url(icons/icons.png) no-repeat -40px -140px;}
+.icon-search { background:url(icons/icons.png) no-repeat -220px -200px;}
+.icon-search2 { background: url(icons/search.png) no-repeat center center; }
+.icon-refresh { background:url(icons/icons.png) no-repeat -140px -40px;}
+.icon-reload { background: url(icons/reload.png) no-repeat center center; }
+.icon-house { background: url(icons/house.png) no-repeat center center; }
+.icon-ok { background: url(icons/ok.png) no-repeat center center; }
+.icon-ok2{ background:url(icons/icons.png) no-repeat 0 0;}
+.icon-cancel { background: url(icons/cancel.png) no-repeat center center; }
+.icon-cancel2{ background:url(icons/icons.png) no-repeat -120px -40px;}
+.icon-no { background: url(icons/no.png) no-repeat center center; }
+.icon-remove { background: url(icons/remove.png) no-repeat center center; }
+.icon-look{ background:url(icons/icons.png) no-repeat -260px -20px; }
+.icon-eye { background: url(icons/eye.png) no-repeat center center; }
+.icon-export{ background:url(icons/icons.png) no-repeat -260px 0;}
+.icon-save{ background:url(icons/icons.png) no-repeat -160px -140px;}
+.icon-down{ background:url(icons/icons.png) no-repeat -280px -500px;}
+.icon-up{ background:url(icons/icons.png) no-repeat -300px -500px;}
+.icon-fix{ background:url(icons/icons.png) no-repeat -380px -200px;}
+.icon-rainbow{ background:url(icons/icons.png) no-repeat -300px -340px;}
+.icon-rainbow2{ background:url(icons/icons.png) no-repeat -200px -460px;}

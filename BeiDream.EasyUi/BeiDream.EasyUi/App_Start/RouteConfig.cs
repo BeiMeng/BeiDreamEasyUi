@@ -7,6 +7,9 @@ using System.Web.Routing;
 
 namespace BeiDream.EasyUi
 {
+    /// <summary>
+    /// 路由注册
+    /// </summary>
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{194E31A3-1CE9-4CCC-B95B-412498EEDD25}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Util.Webs.EasyUi</RootNamespace>
+    <AssemblyName>Util.Webs.EasyUi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Webs.EasyUi.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Webs.EasyUi.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Align.cs" />
+    <Compile Include="Base\ComponentBase.cs" />
+    <Compile Include="Base\ContainerBase.cs" />
+    <Compile Include="Base\ContainerWrapper.cs" />
+    <Compile Include="Base\IComponent.cs" />
+    <Compile Include="Base\IContainer.cs" />
+    <Compile Include="Base\IOption.cs" />
+    <Compile Include="Base\OptionBase.cs" />
+    <Compile Include="Buttons\Button.cs" />
+    <Compile Include="Buttons\ButtonBase.cs" />
+    <Compile Include="Buttons\Button`.cs" />
+    <Compile Include="Buttons\DialogButton.cs" />
+    <Compile Include="Buttons\IButton.cs" />
+    <Compile Include="Buttons\IButtonBase.cs" />
+    <Compile Include="Buttons\IButton`.cs" />
+    <Compile Include="Buttons\IDialogButton.cs" />
+    <Compile Include="Commons\ExpressionResolver.cs" />
+    <Compile Include="Commons\IValidation.cs" />
+    <Compile Include="Commons\LazyValue.cs" />
+    <Compile Include="Commons\Validator.cs" />
+    <Compile Include="Configs\DataGridColumnOption.cs" />
+    <Compile Include="Configs\DataGridOption.cs" />
+    <Compile Include="Configs\LookupOption.cs" />
+    <Compile Include="Configs\SubGridOption.cs" />
+    <Compile Include="EasyUiAttributeBuilder.cs" />
+    <Compile Include="EasyUiControllerBase.cs" />
+    <Compile Include="EasyUiFactory.cs" />
+    <Compile Include="EasyUiFactory`.cs" />
+    <Compile Include="Forms\ComboTrees\ComboTree.cs" />
+    <Compile Include="Forms\ComboTrees\IComboTree.cs" />
+    <Compile Include="Forms\Comboxs\Combox.cs" />
+    <Compile Include="Forms\Comboxs\ComboxItem.cs" />
+    <Compile Include="Forms\Comboxs\Combox`.cs" />
+    <Compile Include="Forms\Comboxs\EntityCombox.cs" />
+    <Compile Include="Forms\Comboxs\ICombox.cs" />
+    <Compile Include="Forms\Comboxs\ICombox`.cs" />
+    <Compile Include="Forms\Form.cs" />
+    <Compile Include="Forms\FormExceptionHandlerAttribute.cs" />
+    <Compile Include="Forms\IForm.cs" />
+    <Compile Include="Forms\TextBoxs\Combo.cs" />
+    <Compile Include="Forms\TextBoxs\EntityTextBox.cs" />
+    <Compile Include="Forms\TextBoxs\ICombo.cs" />
+    <Compile Include="Forms\TextBoxs\ITextBox.cs" />
+    <Compile Include="Forms\TextBoxs\ITextBox`.cs" />
+    <Compile Include="Forms\TextBoxs\TextBox.cs" />
+    <Compile Include="Forms\TextBoxs\TextBox`.cs" />
+    <Compile Include="Grids\DataGrid.cs" />
+    <Compile Include="Grids\DataGridColumn.cs" />
+    <Compile Include="Grids\DataGrid`.cs" />
+    <Compile Include="Grids\EntityDataGridColumn.cs" />
+    <Compile Include="Grids\EntitySubGrid.cs" />
+    <Compile Include="Grids\EntitySubGridColumn.cs" />
+    <Compile Include="Grids\IDataGrid.cs" />
+    <Compile Include="Grids\IDataGridColumn.cs" />
+    <Compile Include="Grids\IDataGridColumn`.cs" />
+    <Compile Include="Grids\IDataGrid`.cs" />
+    <Compile Include="Grids\ISubDataGrid.cs" />
+    <Compile Include="Grids\ISubGridColumn.cs" />
+    <Compile Include="Grids\ITreeGrid.cs" />
+    <Compile Include="Grids\SubDataGrid.cs" />
+    <Compile Include="Grids\SubGridColumn.cs" />
+    <Compile Include="Grids\TreeGrid.cs" />
+    <Compile Include="HtmlHelperExtentions.cs" />
+    <Compile Include="Layouts\ILayout.cs" />
+    <Compile Include="Layouts\ILayoutRegion.cs" />
+    <Compile Include="Layouts\ILayoutRegion`.cs" />
+    <Compile Include="Layouts\IPanel.cs" />
+    <Compile Include="Layouts\ITabPanel.cs" />
+    <Compile Include="Layouts\ITabs.cs" />
+    <Compile Include="Layouts\Layout.cs" />
+    <Compile Include="Layouts\LayoutRegion.cs" />
+    <Compile Include="Layouts\LayoutRegion`.cs" />
+    <Compile Include="Layouts\Panel.cs" />
+    <Compile Include="Layouts\TabPanel.cs" />
+    <Compile Include="Layouts\Tabs.cs" />
+    <Compile Include="Menus\IMenu.cs" />
+    <Compile Include="Menus\IMenuItem.cs" />
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuItem.cs" />
+    <Compile Include="Paginations\IPagination.cs" />
+    <Compile Include="Paginations\Pagination.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\DataGridResult.cs" />
+    <Compile Include="Results\EasyUiResult.cs" />
+    <Compile Include="Results\ResultBase.cs" />
+    <Compile Include="Results\TreeGridResult.cs" />
+    <Compile Include="Results\TreeResult.cs" />
+    <Compile Include="Services\EasyUiService.cs" />
+    <Compile Include="Services\IEasyUiService.cs" />
+    <Compile Include="Trees\ITree.cs" />
+    <Compile Include="Trees\ITreeNode.cs" />
+    <Compile Include="Trees\ITree`.cs" />
+    <Compile Include="Trees\LoadMode.cs" />
+    <Compile Include="Trees\Tree.cs" />
+    <Compile Include="Trees\TreeNode.cs" />
+    <Compile Include="Trees\TreeNodeState.cs" />
+    <Compile Include="Trees\TreeOption.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Util.Json\Util.Json.csproj">
+      <Project>{ed8e071e-aaca-4797-9aa7-7b03dad45225}</Project>
+      <Name>Util.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Webs\Util.Webs.csproj">
+      <Project>{767e1c43-c168-44e4-8cf1-69d001efaa59}</Project>
+      <Name>Util.Webs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.Core.csproj">
+      <Project>{eece9b01-394b-4b1a-964a-6d9dcef14fa2}</Project>
+      <Name>Util.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="说明.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

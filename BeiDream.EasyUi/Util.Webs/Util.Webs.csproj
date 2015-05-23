@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{767E1C43-C168-44E4-8CF1-69D001EFAA59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Util.Webs</RootNamespace>
+    <AssemblyName>Util.Webs</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Webs.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DefineConstants>TRACE;CODE_ANALYSIS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>..\..\Release\Util.Webs.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Json.Net\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AjaxOnlyAttribute.cs" />
+    <Compile Include="ArrayBuilder.cs" />
+    <Compile Include="AttributeBuilder.cs" />
+    <Compile Include="ControllerBase.cs" />
+    <Compile Include="ErrorLogAttribute.cs" />
+    <Compile Include="HtmlEscape.cs" />
+    <Compile Include="HtmlHelperExtentions.cs" />
+    <Compile Include="IMvcService.cs" />
+    <Compile Include="JsonAttributeBuilder.cs" />
+    <Compile Include="MvcBase.cs" />
+    <Compile Include="MvcService.cs" />
+    <Compile Include="Nodes\AttributeListNode.cs" />
+    <Compile Include="Nodes\AttributeNode.cs" />
+    <Compile Include="Nodes\AttributeNodeItem.cs" />
+    <Compile Include="Nodes\IAttributeNode.cs" />
+    <Compile Include="ParamBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateCode.cs" />
+    <Compile Include="TextWriters\ITextWriter.cs" />
+    <Compile Include="TextWriters\StringBuilderWriter.cs" />
+    <Compile Include="TextWriters\TextWriter.cs" />
+    <Compile Include="TraceLogAttribute.cs" />
+    <Compile Include="ViewBase.cs" />
+    <Compile Include="ViewBase`.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Util.Json\Util.Json.csproj">
+      <Project>{ed8e071e-aaca-4797-9aa7-7b03dad45225}</Project>
+      <Name>Util.Json</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Logs.Log4\Util.Logs.Log4.csproj">
+      <Project>{e4f100cf-3865-4f20-a87a-33a009dafa8c}</Project>
+      <Name>Util.Logs.Log4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Security\Util.Security.csproj">
+      <Project>{a0f4b251-cce2-4f7d-afc1-37651d8a131f}</Project>
+      <Name>Util.Security</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.Core.csproj">
+      <Project>{eece9b01-394b-4b1a-964a-6d9dcef14fa2}</Project>
+      <Name>Util.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="说明.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
