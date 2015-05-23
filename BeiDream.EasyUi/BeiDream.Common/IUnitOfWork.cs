@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Util.Datas {
+namespace BeiDream.Common {
     /// <summary>
     /// 工作单元
     /// </summary>
-    public interface IUnitOfWork : IDependency, IDisposable {
+    public interface IUnitOfWork: IDisposable {
         /// <summary>
         /// 启动
         /// </summary>

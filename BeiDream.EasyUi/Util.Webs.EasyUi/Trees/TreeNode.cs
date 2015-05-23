@@ -35,7 +35,7 @@ namespace Util.Webs.EasyUi.Trees {
         /// </summary>
         [Json( PropertyName = "iconCls", NullValueHandling = NullValueHandling.Ignore )]
         [DataMember]
-        public string Icon { get; set; }
+        public string IconClass { get; set; }
         /// <summary>
         /// 级数
         /// </summary>

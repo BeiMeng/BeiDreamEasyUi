@@ -43,6 +43,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc">
+      <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -119,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\DesktopController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,7 +136,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Css\common.css" />
+    <Content Include="Css\images\head_bg.gif" />
     <Content Include="Css\icon.css" />
     <Content Include="Css\icons-upload\icon.css" />
     <Content Include="Css\icons-upload\images\0-195249.gif" />
@@ -543,6 +555,10 @@
     <Content Include="Css\images\uploaders\image.png" />
     <Content Include="Css\images\uploaders\progress.png" />
     <Content Include="Css\images\uploaders\success.png" />
+    <Content Include="Css\images\Login\login_bg.jpg" />
+    <Content Include="Css\images\Login\login_panel.png" />
+    <Content Include="Css\images\Login\Logo.jpg" />
+    <Content Include="Css\images\noscript.gif" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\EasyUi\easyui-lang-zh_CN.js" />
     <Content Include="Scripts\EasyUi\jquery.easyui.datagrid.detailview.js" />
@@ -839,6 +855,26 @@
     <Content Include="log4net.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BeiDream.Common\BeiDream.Common.csproj">
+      <Project>{17f91b97-9001-45cd-ac9e-dc1a2b653ff6}</Project>
+      <Name>BeiDream.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeiDream.PetaPoco\BeiDream.PetaPoco.csproj">
+      <Project>{b0150a63-6069-481f-a6e3-051af259916a}</Project>
+      <Name>BeiDream.PetaPoco</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BeiDream.Services\BeiDream.Services.csproj">
+      <Project>{5db3759a-2574-4966-9487-141e9f0ab5b1}</Project>
+      <Name>BeiDream.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentBootstrap.Mvc\FluentBootstrap.Mvc.csproj">
+      <Project>{dc78ef6d-b139-447e-989e-562aacb4f52f}</Project>
+      <Name>FluentBootstrap.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FluentBootstrap\FluentBootstrap.csproj">
+      <Project>{fe49cf3b-6563-447b-b94e-018b334096e4}</Project>
+      <Name>FluentBootstrap</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util.Json\Util.Json.csproj">
       <Project>{ed8e071e-aaca-4797-9aa7-7b03dad45225}</Project>
       <Name>Util.Json</Name>
@@ -855,6 +891,19 @@
       <Project>{eece9b01-394b-4b1a-964a-6d9dcef14fa2}</Project>
       <Name>Util.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Center.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
+    <Content Include="Views\Home\Left.cshtml" />
+    <Content Include="Views\Home\Top.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Desktop\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,21 @@
+﻿<div data-options="region:'north',border:false" style="height: 70px">
+        <div class="container-fluid" style="background-image: url(/Css/images/head_bg.gif); height: 70px">
+            <a class="navbar-brand" href="#">
+                <div style="font-size: 40px; font-family: 微软雅黑; font-weight: bold; color: white">
+                     
+                    @Html.Bootstrap().Image("/Css/images/login/logo.jpg", "").AddStyle("height", "40px").AddStyle("width", "80px")
+                    权限管理系统
+                </div>
+            </a>
+            <span style="float: right; padding-top: 18px">
+    <a href="javascript:void(0)" class="easyui-menubutton" style="font-size: 15px; font-family: 微软雅黑; font-weight: bold; color: black" data-options="menu:'#mm_user',iconCls:'icon-rainbow'">当前用户:@ViewBag.UserName</a>
+    <div id="mm_user" style="width: 150px;">
+        <div data-options="iconCls:'icon-rainbow'">个人设置</div>
+        <div data-options="iconCls:'icon-edit'">修改密码</div>
+        <div class="menu-sep"></div>
+        <div data-options="iconCls:'icon-user_go'">安全退出</div>
+    </div>
+</span>
+
+            </div>
+</div>

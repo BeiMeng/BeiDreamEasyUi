@@ -1,1 +1,42 @@
-﻿
+﻿@*@using Util.Webs.EasyUi;在View的Web.config里注册之后就不用在页面上引用了*@
+@section head{
+    <style type="text/css">
+        .noscript {
+            position: absolute;
+            z-index: 100000;
+            height: 2046px;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            background: white;
+            text-align: center;
+        }
+        .footer {
+            text-align: center;
+            color: #15428B;
+            margin: 0px;
+            padding: 0px;
+            line-height: 23px;
+            font-weight: bold;
+        }
+    </style>
+}
+@section Scripts{
+    <script src="~/Scripts/Projects/project.js"></script>
+    <script type="text/javascript">
+        
+    </script>
+}
+<body class="easyui-layout" fit="true" scroll="no">
+<noscript>
+    <div class="noscript">
+        <img src="~/Css/images/noscript.gif" alt="抱歉，请开启脚本支持！"/>
+    </div>
+</noscript>
+    @Html.Partial("Top")
+    @Html.Action("LeftMenu")
+    @Html.Partial("Center")
+    @Html.Partial("Footer")
+</body>
+
+
