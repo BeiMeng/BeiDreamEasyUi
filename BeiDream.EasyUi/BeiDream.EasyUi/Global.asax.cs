@@ -10,9 +10,9 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using BeiDream.Common;
-using BeiDream.Services.IServices;
-using BeiDream.Services.PetaPoco.Service;
 using BeiDream.Services.Systems;
+using BeiDream.Services.Systems.IServices;
+using BeiDream.Services.Systems.PetaPoco.Service;
 
 namespace BeiDream.EasyUi
 {

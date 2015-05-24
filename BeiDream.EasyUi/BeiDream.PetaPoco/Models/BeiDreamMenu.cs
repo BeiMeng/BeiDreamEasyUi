@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BeiDream.Common;
 
 namespace BeiDream.PetaPoco.Models
 {
     [TableName("BeiDreamMenu")]
-    [PrimaryKey("MenuId", autoIncrement = false)]
+    [PrimaryKey("Id", autoIncrement = false)]
     [ExplicitColumns]
-    public partial class BeiDreamMenu
+    public partial class BeiDreamMenu : TreeEntityBase<Guid, Guid?>
     {
-        [Column]
-        public Guid MenuId { get; set; }
-        [Column]
-        public Guid? ParentId { get; set; }
         [Column]
         public string Code { get; set; }
         [Column]
         public string Text { get; set; }
-        [Column]
-        public string Path { get; set; }
-        [Column]
-        public int Level { get; set; }
         [Column]
         public int SortId { get; set; }
         [Column]

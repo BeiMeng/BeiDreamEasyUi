@@ -44,8 +44,8 @@
   <ItemGroup>
     <Compile Include="Business\BizPetaPocoUnitOfWork.cs" />
     <Compile Include="Common\TreeServiceHelper.cs" />
-    <Compile Include="Systems\Dtos\Systems\MenuViewModel.cs" />
-    <Compile Include="Systems\Dtos\Systems\MenuViewModelExtension.cs" />
+    <Compile Include="Systems\Dtos\MenuViewModel.cs" />
+    <Compile Include="Systems\Dtos\MenuViewModelExtension.cs" />
     <Compile Include="Systems\IServices\IMenuRepository.cs" />
     <Compile Include="Systems\PetaPoco.Service\PetaPocoMenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

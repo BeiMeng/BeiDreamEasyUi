@@ -1,7 +1,7 @@
 ﻿using BeiDream.PetaPoco.Models;
 using Util;
 
-namespace BeiDream.Services.Dtos.Systems
+namespace BeiDream.Services.Systems.Dtos
 {
     public static class MenuViewModelExtension
     {
@@ -9,7 +9,7 @@ namespace BeiDream.Services.Dtos.Systems
         {
             MenuViewModel menuViewModel = new MenuViewModel
             {
-                Id=entity.MenuId.ToString(),
+                Id=entity.Id.ToString(),
                 ParentId=entity.ParentId.ToString(),
                 Code=entity.Code,
                 Text=entity.Text,
@@ -31,7 +31,7 @@ namespace BeiDream.Services.Dtos.Systems
         {
             BeiDreamMenu beiDreamMenuModel = new BeiDreamMenu
             {
-                MenuId = dto.Id.ToGuid(),
+                Id = dto.Id.ToGuid(),
                 ParentId = dto.ParentId.ToGuid(),
                 Code = dto.Code,
                 Text = dto.Text,

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using Util.Webs.EasyUi.Trees;
 
-namespace BeiDream.Services.Dtos.Systems
+namespace BeiDream.Services.Systems.Dtos
 {
     public class MenuViewModel:ITreeNode
     {

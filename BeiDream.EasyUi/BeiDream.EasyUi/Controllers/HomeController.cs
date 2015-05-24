@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BeiDream.Services.Dtos.Systems;
-using BeiDream.Services.IServices;
-using BeiDream.Services.PetaPoco.Service;
+using BeiDream.Services.Systems.Dtos;
+using BeiDream.Services.Systems.IServices;
 using Util.Webs.EasyUi.Results;
 using Util.Webs.EasyUi.Trees;
 
@@ -18,9 +17,6 @@ namespace BeiDream.EasyUi.Controllers
             MenuRepository = menuRepository;
         }
 
-        /// <summary>
-        /// 地区服务
-        /// </summary>
         protected IMenuRepository MenuRepository { get; private set; }
         //
         // GET: /Home/
@@ -28,7 +24,6 @@ namespace BeiDream.EasyUi.Controllers
         public ActionResult Index()
         {
             ViewBag.UserName = "管理员";
-            ViewBag.Skin = "default";
             return View();
 
         }

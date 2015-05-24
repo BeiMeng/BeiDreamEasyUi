@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using BeiDream.Common;
 using BeiDream.PetaPoco.Models;
-using BeiDream.Services.Dtos.Systems;
+using BeiDream.Services.Systems.Dtos;
 using Util.Webs.EasyUi.Trees;
 
-namespace BeiDream.Services.IServices
+namespace BeiDream.Services.Systems.IServices
 {
     public interface IMenuRepository : IRepository<BeiDreamMenu, Guid>
     {

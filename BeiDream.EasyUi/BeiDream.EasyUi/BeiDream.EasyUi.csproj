@@ -125,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\Systems\Controllers\MenuManageController.cs" />
+    <Compile Include="Areas\Systems\SystemsAreaRegistration.cs" />
     <Compile Include="Controllers\DesktopController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -136,10 +138,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Css\common.css" />
     <Content Include="Css\images\head_bg.gif" />
     <Content Include="Css\icon.css" />
@@ -887,6 +890,10 @@
       <Project>{194e31a3-1ce9-4ccc-b95b-412498eedd25}</Project>
       <Name>Util.Webs.EasyUi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Util.Webs\Util.Webs.csproj">
+      <Project>{767e1c43-c168-44e4-8cf1-69d001efaa59}</Project>
+      <Name>Util.Webs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util\Util.Core.csproj">
       <Project>{eece9b01-394b-4b1a-964a-6d9dcef14fa2}</Project>
       <Name>Util.Core</Name>
@@ -902,8 +909,22 @@
     <Content Include="Views\Desktop\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Systems\Views\MenuManage\Index.cshtml" />
+    <Content Include="Areas\Systems\Views\Web.config" />
+    <Content Include="Areas\Systems\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Systems\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

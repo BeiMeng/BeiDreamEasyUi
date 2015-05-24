@@ -39,9 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityBase.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Page\IPager.cs" />
+    <Compile Include="Page\PagedList.cs" />
+    <Compile Include="Page\Pager.cs" />
+    <Compile Include="Page\PagerList.cs" />
+    <Compile Include="PetaPoco\ColumnAttribute.cs" />
+    <Compile Include="StateDescription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TreeEntityBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Util\Util.Core.csproj">
+      <Project>{eece9b01-394b-4b1a-964a-6d9dcef14fa2}</Project>
+      <Name>Util.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

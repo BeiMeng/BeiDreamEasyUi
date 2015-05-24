@@ -23,18 +23,12 @@ namespace BeiDream.PetaPoco {
         /// </summary>
         protected PetaPocoUnitOfWork UnitOfWork { get; private set; }
 
-        ///// <summary>
-        ///// 数据库连接
-        ///// </summary>
-        //protected IDbConnection Connection {
-        //    get { return UnitOfWork.Database.Connection; }
-        //}
-
         /// <summary>
         /// 添加实体
         /// </summary>
         /// <param name="entity">实体</param>
-        public void Add( TEntity entity ) {
+        public virtual void Add(TEntity entity)
+        {
             UnitOfWork.Insert( entity );
             UnitOfWork.CommitByStart();
         }
