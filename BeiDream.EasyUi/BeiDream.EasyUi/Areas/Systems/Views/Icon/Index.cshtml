@@ -1,0 +1,41 @@
+﻿@{
+    var x = @Html.EasyUi();
+}
+@section SitePath {
+    @*站点路径*@
+    <div class="titlebar">
+        <span class="title">当前位置：</span>
+        <span>首页</span>
+        <span class="bold">></span>
+        <span>系统管理</span>
+        <span class="bold">></span>
+        <span>权限管理</span>
+    </div>
+}
+@section head {
+    <style type="text/css">
+
+    </style>
+}
+@section top {
+    @using (Html.Bootstrap().Div().AddCss("toolbar").Begin())
+    {
+        @(x.DialogButton("批量添加图标", "/commons/icon/batchAdd?categoryId=" + Model.CategoryId)
+                    .Icon("icon-add").Plain().DialogSize(1030, 510).DialogIcon("icon-rainbow")
+                    .Title("批量添加图标——当前分类：" + Model.CategoryName).OnInit()
+        )
+        @x.Button("删除图标").Icon("icon-delete").Plain().Delete()
+        @x.DialogButton("查看详细", "/commons/icon/detail").Id("btnLook").Icon("icon-look").Plain().DialogSize(880, 280).ShowDetailDialog()
+        @x.Button("刷 新").Icon("icon-refresh").Plain().Refresh()
+    }
+}
+@section content {
+
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+
+        });
+    </script>
+}

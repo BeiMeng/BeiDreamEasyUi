@@ -15,7 +15,6 @@ namespace BeiDream.Common
         public string CreatePerson { get; set; }
         [Column]
         public DateTime? CreateTime { get; set; }
-        [ResultColumn]
-        public byte[] Version { get; set; }
+
     }
 }

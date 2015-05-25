@@ -30,5 +30,7 @@ namespace BeiDream.PetaPoco.Models
         public string UpdatePerson { get; set; }
         [Column]
         public DateTime? UpdateTime { get; set; }
+        [ResultColumn]
+        public byte[] Version { get; set; }
     }
 }

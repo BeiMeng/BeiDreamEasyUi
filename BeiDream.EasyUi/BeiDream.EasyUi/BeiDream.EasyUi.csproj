@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\Systems\Controllers\IconController.cs" />
     <Compile Include="Areas\Systems\Controllers\MenuManageController.cs" />
     <Compile Include="Areas\Systems\SystemsAreaRegistration.cs" />
     <Compile Include="Controllers\DesktopController.cs" />
@@ -925,6 +926,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap\bootstrap.css.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Systems\Views\Icon\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
