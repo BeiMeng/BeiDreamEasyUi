@@ -12,22 +12,20 @@ namespace BeiDream.EasyUi
         public static void RegisterBundles( BundleCollection bundles ) {
             //启用打包压缩
             //BundleTable.EnableOptimizations = true;
-            //EasyUi样式
-            bundles.Add( new StyleBundle( "~/Scripts/EasyUi/themes/default/css" ).Include(
-                "~/Scripts/EasyUi/themes/default/easyui.css" ) );
             //css样式
-            bundles.Add( new StyleBundle( "~/Css/css" ).Include(
+            bundles.Add(new StyleBundle("~/Css/css").Include(
                 "~/Css/icon.css",
-                "~/Css/common.css" ) );
+                "~/Css/common.css"));
             //Easyui扩展
-            bundles.Add( new ScriptBundle( "~/Scripts/EasyUi/js" ).Include(
+            bundles.Add(new ScriptBundle("~/Scripts/EasyUi/js").Include(
                 "~/Scripts/EasyUi/easyui-lang-zh_CN.js",
                 "~/scripts/EasyUi/jquery.easyui.edatagrid.js",
                 "~/scripts/EasyUi/jquery.easyui.treegrid.dnd.js",
                 "~/scripts/EasyUi/jquery.easyui.etreegrid.js",
-                "~/scripts/EasyUi/jquery.easyui.datagrid.detailview.js" ) );
+                "~/scripts/EasyUi/jquery.easyui.datagrid.detailview.js",
+                "~/scripts/EasyUi/jquery.easyui.datagrid.lookup.js"));
             //util js
-            bundles.Add( new ScriptBundle( "~/Scripts/Utils/js" ).Include(
+            bundles.Add(new ScriptBundle("~/Scripts/Utils/js").Include(
                 "~/Scripts/Utils/util.js",
                 "~/Scripts/Utils/jquery.util.js",
                 "~/Scripts/Utils/jquery.util.webuploader.js",
@@ -37,7 +35,7 @@ namespace BeiDream.EasyUi
                 "~/Scripts/Utils/jquery.util.easyui.form.js",
                 "~/Scripts/Utils/jquery.util.easyui.grid.js",
                 "~/Scripts/Utils/jquery.util.easyui.tree.js",
-                "~/Scripts/Utils/jquery.util.easyui.fn.js" ) );
+                "~/Scripts/Utils/jquery.util.easyui.fn.js"));
         }
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BeiDreamMenu.cs" />
+    <Compile Include="Models\Icon.cs" />
     <Compile Include="PetaPoco.cs" />
     <Compile Include="PetaPocoUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

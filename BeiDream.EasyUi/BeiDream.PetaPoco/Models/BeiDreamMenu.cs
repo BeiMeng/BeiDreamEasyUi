@@ -27,14 +27,8 @@ namespace BeiDream.PetaPoco.Models
         [Column]
         public bool Enabled { get; set; }
         [Column]
-        public string CreatePerson { get; set; }
-        [Column]
-        public DateTime? CreateTime { get; set; }
-        [Column]
         public string UpdatePerson { get; set; }
         [Column]
         public DateTime? UpdateTime { get; set; }
-        [ResultColumn]
-        public byte[] Version { get; set; }
     }
 }

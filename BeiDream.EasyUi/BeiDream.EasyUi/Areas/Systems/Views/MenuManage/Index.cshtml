@@ -49,15 +49,15 @@
                 x.GridColumn(t => t.PinYin, 80),
                 x.GridColumn(t => t.Url, 200, true),
                 x.GridColumn(t => t.Enabled, 50, true),
-                        x.GridColumn(t => t.IconClass, 200,true).FormatImage(16, 16, true).Lookup(new LookupOption
-                        {
-                            Url = "/Commons/Icon/IconsControl",
-                            Title = "选择图标",
-                            Icon = "icon-rainbow",
-                            Editable = false,
-                            Width = 920,
-                            Height = 400
-                        }),
+                x.GridColumn(t => t.IconClass, 200, true).Width(150).Align(AlignLeftRigthCenter.Center, AlignLeftRigthCenter.Center).FormatImage(16, 16, true).Lookup(new LookupOption
+                {
+                    Url = "/Commons/Icon/IconsControl",
+                    Title = "选择图标",
+                    Icon = "icon-rainbow",
+                    Editable = false,
+                    Width = 920,
+                    Height = 400
+                }),
                 x.GridColumn(t => t.UpdateTime, 150)
             )
     )

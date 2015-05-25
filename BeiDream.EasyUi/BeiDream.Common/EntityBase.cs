@@ -11,5 +11,11 @@ namespace BeiDream.Common
     {
         [Column]
         public TKey Id { get; set; }
+        [Column]
+        public string CreatePerson { get; set; }
+        [Column]
+        public DateTime? CreateTime { get; set; }
+        [ResultColumn]
+        public byte[] Version { get; set; }
     }
 }
