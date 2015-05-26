@@ -25,6 +25,14 @@
                 }
             }
         });
+
+        setTimeout(function() {
+            var grid = $("table.easyui-treegrid-edit");
+            if (grid.attr("enableDrag")) {
+                grid.etreegrid('enableDnd');
+                level = $.toNumber(grid.attr("enableDrag"));
+            }
+        },800);
     });
 
     function buildGrid(target) {
@@ -63,7 +71,7 @@
                 if (opts.onBeforeLoad.call(target, param) == false) {
                     return false;
                 }
-                if (row != null && isLoadChilds)
+                if (row!=null && isLoadChilds)
                     param.QueryOperation = "LoadChilds";
                 $(this).etreegrid('cancelRow');
                 return true;
@@ -165,7 +173,7 @@
                 if (!row)
                     return;
                 var grid = $(this);
-                var childs = $.easyui.treegrid.getChilds(grid, row.Id);
+                var childs = $.easyui.treegrid.getChilds(grid,row.Id);
                 $.each(childs, function (i, item) {
                     grid.treegrid("checkRow", item.Id);
                 });
@@ -264,11 +272,6 @@
                 $.data(this, 'etreegrid', {
                     options: $.extend({}, $.fn.etreegrid.defaults, $.fn.etreegrid.parseOptions(this), options)
                 });
-                var grid = $(this);
-                if (grid.attr("enableDrag")) {
-                    grid.etreegrid('enableDnd');
-                    level = $.toNumber(grid.attr("enableDrag"));
-                }
             }
             buildGrid(this);
         });
@@ -387,7 +390,7 @@
                 isEnableDnd = true;
             });
         },
-        dragMinLevel: function (jq, minLevel) {
+        dragMinLevel: function (jq,minLevel) {
             level = minLevel;
         }
     };

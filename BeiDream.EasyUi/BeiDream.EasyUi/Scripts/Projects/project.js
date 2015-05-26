@@ -42,7 +42,6 @@
 
                 //绑定选项卡双击事件
                 function bindTabsDbClick() {
-                    $(".tabs-inner").unbind("dblclick");
                     $(".tabs-inner").dblclick(function () {
                         var selectedTab = tabs.tabs('getSelected');
                         var selectedIndex = tabs.tabs('getTabIndex', selectedTab);
