@@ -851,7 +851,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\ContentLayout.cshtml" />
-    <Content Include="Views\Shared\TreeGridMenu.cshtml" />
+    <Content Include="Views\Shared\Menus\TreeGridMenu.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
@@ -886,6 +886,10 @@
     <ProjectReference Include="..\Util.Logs.Log4\Util.Logs.Log4.csproj">
       <Project>{e4f100cf-3865-4f20-a87a-33a009dafa8c}</Project>
       <Name>Util.Logs.Log4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Util.Uploaders.WebUploader\Util.Uploaders.WebUploader.csproj">
+      <Project>{9f0e1c7e-5830-465e-81ec-a0d370f64b81}</Project>
+      <Name>Util.Uploaders.WebUploader</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util.Webs.EasyUi\Util.Webs.EasyUi.csproj">
       <Project>{194e31a3-1ce9-4ccc-b95b-412498eedd25}</Project>
@@ -929,6 +933,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Systems\Views\Icon\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Systems\Views\Icon\Parts\Icon.Form.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Commons\CloseDialogButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Uploaders\Images.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

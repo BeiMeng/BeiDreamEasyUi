@@ -278,15 +278,25 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             ValidateAddCodeRepeatAndTextRepeat(beiDreamMenu);
         }
         /// <summary>
-        /// 验证编码重复问题
+        /// 验证编码和名称重复问题
         /// </summary>
         private void ValidateAddCodeRepeatAndTextRepeat(BeiDreamMenu beiDreamMenu)
         {
             Sql sql = new Sql();
-            sql.Where("Code=@Code  or Text=@Text", new { beiDreamMenu.Code, beiDreamMenu.Text });
+            sql.Where("Code=@Code", new { beiDreamMenu.Code});
             List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
             if (menus == null || menus.Count == 0)
-                return;
+            {
+                Sql sqlText = new Sql();
+                sqlText.Where("Text=@Text", new {beiDreamMenu.Text });
+                List<BeiDreamMenu> menusText = UnitOfWork.Fetch<BeiDreamMenu>(sql);
+                if (menusText == null || menusText.Count == 0)
+                {
+                    return;
+                }
+                else
+                    throw new Warning(string.Format("菜单 '{0}' 已存在，请修改", "名称"));
+            }
             else
                 throw new Warning(string.Format("菜单 '{0}' 已存在，请修改", "编码"));
         }

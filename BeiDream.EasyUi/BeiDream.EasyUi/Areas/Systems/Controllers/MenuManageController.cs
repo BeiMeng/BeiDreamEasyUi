@@ -23,7 +23,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         }
 
         protected IMenuRepository MenuRepository { get; private set; }
-        private const LoadMode loadMode = LoadMode.Async;
+        private const LoadMode loadMode = LoadMode.Sync;
         //
         // GET: /Systems/MenuManage/
 

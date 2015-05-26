@@ -7,10 +7,10 @@ using BeiDream.Common;
 
 namespace BeiDream.PetaPoco.Models
 {
-    [TableName("Icon")]
-    [PrimaryKey("IconId", autoIncrement = false)]
+    [TableName("Icons")]
+    [PrimaryKey("Id", autoIncrement = false)]
     [ExplicitColumns]
-    public partial class Icon : EntityBase<Guid>
+    public partial class Icons : EntityBase<Guid>
     {
         /// <summary>
         /// 图标名称
