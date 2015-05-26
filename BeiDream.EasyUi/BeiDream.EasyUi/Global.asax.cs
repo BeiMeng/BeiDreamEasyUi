@@ -11,8 +11,11 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using BeiDream.Common;
 using BeiDream.Services.Systems;
+using BeiDream.Services.Systems.Commom;
+using BeiDream.Services.Systems.Configs;
 using BeiDream.Services.Systems.IServices;
 using BeiDream.Services.Systems.PetaPoco.Service;
+using Util.Files;
 
 namespace BeiDream.EasyUi
 {
@@ -35,6 +38,11 @@ namespace BeiDream.EasyUi
             //    .AsImplementedInterfaces();
             builder.RegisterType<SysPetaPocoUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<PetaPocoMenuRepository>().As<IMenuRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<PetaPocoIconRepository>().As<IIconRepositiory>().InstancePerLifetimeScope();
+            builder.RegisterType<IconManager>().As<IIconManager>().InstancePerLifetimeScope();
+            builder.RegisterType<TenantUploadPathStrategy>().As<IUploadPathStrategy>().SingleInstance();
+            builder.RegisterType<FileUpload>().As<IFileUpload>().InstancePerLifetimeScope();
+            builder.RegisterType<FileManager>().As<IFileManager>().InstancePerLifetimeScope();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

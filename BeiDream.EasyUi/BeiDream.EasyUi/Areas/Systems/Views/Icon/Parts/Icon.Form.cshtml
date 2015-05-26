@@ -7,7 +7,7 @@
 <script type="text/javascript">
     //刷新图标面板
     function refreshIconPanel() {
-        $.easyui.refreshPanel("panelIcon", "/commons/icon/iconPanel");
+        $.easyui.refreshPanel("grid", "/Systems/Icon/query");
     }
     //上传完成
     function uploadFinish() {
@@ -18,6 +18,6 @@
     }
 </script>
 @*上传控件*@
-@Html.Uploader().Images("/Systems/Icon/upload").Thumb(32, 32).Limit(5000, 2000).FormData(null).OnFinish("uploadFinish()")
+@Html.Uploader().Images("/Systems/Icon/upload").Thumb(32, 32).Limit(5000, 2000).OnFinish("uploadFinish()")
 @*关闭按钮*@
 @Html.Partial("Commons/CloseDialogButton")

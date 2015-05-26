@@ -239,8 +239,11 @@
                     throw new Error('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
                 }
 
-                //设置MVC防伪标记
-                opts.formData.__RequestVerificationToken = $.getAntiForgeryToken();
+                if ($.containsProperty(opts, "formData")) {
+                    //设置MVC防伪标记
+                    opts.formData.__RequestVerificationToken = $.getAntiForgeryToken();
+                }
+
 
                 // 实例化
                 uploader = WebUploader.create({

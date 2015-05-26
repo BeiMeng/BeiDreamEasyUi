@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
+using BeiDream.Common;
 using BeiDream.Common.Page;
 using BeiDream.EasyUi.Controllers;
 using BeiDream.Services.Systems.Dtos;
@@ -114,14 +115,4 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
             return new EasyUiResult(StateCode.Ok, "操作成功", data).GetResult();
         }
     }
-
-    public class QueryModel
-    {
-        public string Id { get; set; }
-        public int Page { get; set; }
-        public int Rows { get; set; }
-        public string Order { get; set; }
-        public string Sort { get; set; }
-    }
-
 }

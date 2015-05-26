@@ -52,5 +52,36 @@ namespace BeiDream.PetaPoco.Models
         /// </summary>
         [ResultColumn]
         public byte[] Version { get; set; }
+
+        /// <summary>
+        /// 生成Css
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        public void GenerateCss(string filePath)
+        {
+            ClassName = CreateClassName(filePath);
+            Css = CreateCss(filePath);
+        }
+
+        /// <summary>
+        /// 创建类名
+        /// </summary>
+        private string CreateClassName(string filePath)
+        {
+            return string.Format("icon-{0}", System.IO.Path.GetFileNameWithoutExtension(filePath));
+        }
+        /// <summary>
+        /// 创建Css
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        public static string CreateCss(string filePath)
+        {
+            var result = new StringBuilder();
+            result.AppendFormat(".icon-{0}", System.IO.Path.GetFileNameWithoutExtension(filePath));
+            result.Append("{");
+            result.AppendFormat("background:url(images/{0}) no-repeat center center;", System.IO.Path.GetFileName(filePath));
+            result.Append("}");
+            return result.ToString();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace BeiDream.Common
         [Column]
         public string CreatePerson { get; set; }
         [Column]
-        public DateTime? CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
     }
 }

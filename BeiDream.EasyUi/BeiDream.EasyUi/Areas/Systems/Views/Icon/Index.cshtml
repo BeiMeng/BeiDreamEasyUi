@@ -1,5 +1,10 @@
-﻿@{
+﻿@model BeiDream.Services.Systems.Dtos.IconViewModel
+@{
     var x = @Html.EasyUi();
+}
+@section head {
+    <style type="text/css">
+    </style>
 }
 @section SitePath {
     @*站点路径*@
@@ -12,11 +17,6 @@
         <span>权限管理</span>
     </div>
 }
-@section head {
-    <style type="text/css">
-
-    </style>
-}
 @section top {
     @using (Html.Bootstrap().Div().AddCss("toolbar").Begin())
     {
@@ -25,17 +25,37 @@
                     .Title("批量添加图标")
         )
         @x.Button("删除图标").Icon("icon-delete").Plain().Delete()
-        @x.DialogButton("查看详细", "/commons/icon/detail").Id("btnLook").Icon("icon-look").Plain().DialogSize(880, 280).ShowDetailDialog()
+        @x.DialogButton("查看详细", "/Systems/Icon/detail").Id("btnLook").Icon("icon-look").Plain().DialogSize(880, 280).ShowDetailDialog()
         @x.Button("刷 新").Icon("icon-refresh").Plain().Refresh()
     }
 }
 @section content {
-
+    @*右键菜单*@
+    @x.Menu("menuGrid").Click("$.easyui.fnClickGridMenuItem_Form").Duration(600).Items(
+                    x.MenuItem("menuItem_Delete", "删 除", "icon-delete"),
+                    x.MenuItem("menuItem_Look", "查看详细", "icon-look"),
+                    x.MenuItem("menuItem_Refresh", "刷 新", "icon-refresh")
+                    )
+    @*查询表单*@
+    @*表格*@
+    @(x.Grid("grid").Sort("CreateTime").Url("/Systems/Icon/Query")
+                        .ShowEditDialogByDblClick("btnLook").Menu().Fit().FitColumns()
+                        .Columns(
+                            x.GridColumn(t => t.Id).CheckBox(),
+                            x.GridColumn(t => t.Icon, 35).FormatImage(32, 32),
+                            x.GridColumn(t => t.Name, 180),
+                            x.GridColumn(t => t.ClassName, 200),
+                            x.GridColumn(t => t.Size, 80),
+                            x.GridColumn(t => t.Width, 50),
+                            x.GridColumn(t => t.Height, 50),
+                            x.GridColumn(t => t.CreateTime, 120)
+                        )
+    )
 }
 @section Scripts {
     <script type="text/javascript">
         $(function () {
-
+            $.easyui.deleteUrl = "/Systems/Icon/delete";
         });
     </script>
 }
