@@ -14,5 +14,7 @@ namespace BeiDream.Services.Systems.IServices
         void UpLoadAndAddIcon(string uploadIconPath, string cssPath);
 
         List<IconViewModel> GetAll();
+
+        List<IconViewModel> GetAllByQuery(int width,int height);
     }
 }

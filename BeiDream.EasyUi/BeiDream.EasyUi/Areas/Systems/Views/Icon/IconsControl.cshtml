@@ -1,0 +1,37 @@
+﻿@{
+    var x = Html.EasyUi();
+}
+@*样式*@
+<style type="text/css">
+    .pagination {
+        background: #efefef;
+        border-top: 1px solid #ccc;
+    }
+
+    .iconList {
+        list-style-type: none;
+        margin: 0;
+        padding: 8px;
+    }
+
+    .li {
+        float: left;
+        padding: 4px;
+    }
+
+        .li img:hover {
+            padding: 0 0 2px 2px;
+            cursor: pointer;
+        }
+</style>
+@*脚本*@
+<script type="text/javascript">
+    //分页操作
+    function refreshTab(url, target) {
+        var tab = $(target).parents(".tab_Size");
+        tab.panel("refresh", url);
+    }
+</script>
+@Html.Action("GetSizeTabs")      
+@*关闭按钮*@
+@Html.Partial("Commons/CloseDialogButton")

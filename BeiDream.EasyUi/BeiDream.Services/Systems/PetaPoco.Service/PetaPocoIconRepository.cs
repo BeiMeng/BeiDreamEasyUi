@@ -77,5 +77,14 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             return entity.ToDto();
         }
         #endregion
+
+
+        public List<IconViewModel> GetAllByQuery(int width, int height)
+        {
+            Sql sql=new Sql();
+            sql.Where("Width=@0", width).Where("Height=@0", height);
+            List<Icons> icons = UnitOfWork.Fetch<Icons>(sql);
+            return icons.Select(ToDto).ToList();
+        }
     }
 }

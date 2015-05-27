@@ -1,4 +1,5 @@
-﻿using BeiDream.PetaPoco.Models;
+﻿using System;
+using BeiDream.PetaPoco.Models;
 using Util;
 
 namespace BeiDream.Services.Systems.Dtos
@@ -42,7 +43,7 @@ namespace BeiDream.Services.Systems.Dtos
                 IconClass = dto.IconClass,
                 PinYin = dto.PinYin,
                 Enabled=dto.Enabled,
-                Version=dto.Version
+                Version=dto.Version               
             };
             return beiDreamMenuModel;
         }

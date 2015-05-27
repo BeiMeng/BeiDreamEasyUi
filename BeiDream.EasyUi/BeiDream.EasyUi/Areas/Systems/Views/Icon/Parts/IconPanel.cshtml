@@ -1,0 +1,27 @@
+﻿@model BeiDream.Services.Systems.Dtos.IconViewModel
+@{
+    var x = @Html.EasyUi();
+}
+@*图标面板*@
+@using (x.Layout(true).Begin())
+{
+    //多加一个Panel层是方便弹出层关闭后刷新页面使用，直接刷新grid目前无效
+    using (@x.Panel().Id("panelIcon").Border(false).Padding(0, 0, 0, 0).Center().AddClass("content").Begin())
+     {
+            @*查询表单*@
+            @*表格*@
+         @(x.Grid("grid").Sort("CreateTime").Url("/Systems/Icon/Query")
+               .ShowEditDialogByDblClick("btnLook").Menu().Fit().FitColumns()
+               .Columns(
+                   x.GridColumn(t => t.Id).CheckBox(),
+                   x.GridColumn(t => t.Icon, 35).FormatImage(32, 32),
+                   x.GridColumn(t => t.Name, 180),
+                   x.GridColumn(t => t.ClassName, 200),
+                   x.GridColumn(t => t.Size, 80),
+                   x.GridColumn(t => t.Width, 50),
+                   x.GridColumn(t => t.Height, 50),
+                   x.GridColumn(t => t.CreateTime, 120)
+               )
+               )
+     }
+}

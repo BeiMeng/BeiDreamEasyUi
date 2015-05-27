@@ -1,0 +1,39 @@
+﻿@model BeiDream.Services.Systems.Dtos.IconListViewModel
+@{
+    var x = Html.EasyUi();
+}
+@*脚本*@
+<script type="text/javascript">
+    $(function () {
+        //点击图标，查找带回
+        $(".li img").click(function () {
+            $.easyui.grid.lookup($(this).attr("class"));
+            $.easyui.closeDialog();
+        });
+    });
+</script>
+@using (x.Layout(true).Begin())
+{
+    using (x.LayoutRegion().Center().Begin())
+    {
+        @*图标列表*@
+        <ul class="iconList">
+            @foreach (var icon in Model.Icons)
+            {
+                <li class="li" title="@icon.Name" style="width: @(icon.Width)px;height: @(icon.Height)px">
+                    <img class="@icon.ClassName" width="@icon.Width" height="@icon.Height" />
+                </li>
+            }
+        </ul>
+    }
+    using (x.LayoutRegion().Bottom().Height(32).AddStyle("background", "#A9FACD").Begin())
+    {
+        @*分页*@
+        @(Html.EasyUi().Pagination().PageList(50, 100, 200, 500).PageNumber(Model.Icons.CurrentPageIndex)
+            .PageSize(Model.Icons.PageSize).Total(Model.Icons.TotalItemCount)
+            .Url(string.Format("/Systems/Icon/GetIconTab?Width={0}&Height={1}", Model.Width, Model.Height), "refreshTab")
+        )
+    }
+}
+
+

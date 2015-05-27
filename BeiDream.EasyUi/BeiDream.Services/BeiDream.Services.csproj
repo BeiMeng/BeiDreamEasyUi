@@ -48,6 +48,7 @@
     <Compile Include="Systems\Commom\IIconManager.cs" />
     <Compile Include="Systems\Configs\ConfigInfo.cs" />
     <Compile Include="Systems\Configs\TenantUploadPathStrategy.cs" />
+    <Compile Include="Systems\Dtos\IconListViewModel.cs" />
     <Compile Include="Systems\Dtos\IconViewModelExtension.cs" />
     <Compile Include="Systems\Dtos\IconViewModel.cs" />
     <Compile Include="Systems\Dtos\MenuViewModel.cs" />
