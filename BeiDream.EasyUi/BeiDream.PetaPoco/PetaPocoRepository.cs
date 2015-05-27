@@ -83,12 +83,24 @@ namespace BeiDream.PetaPoco {
 
         public void Remove(IEnumerable<TKey> ids)
         {
-            throw new NotImplementedException();
+            if (ids == null)
+                return;
+            foreach (var id in ids)
+            {
+                Remove(id);
+            }
+            UnitOfWork.CommitByStart();
         }
 
         public void Remove(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            if (entities == null)
+                return;
+            foreach (var entity in entities)
+            {
+                Remove(entity);
+            }
+            UnitOfWork.CommitByStart();
         }
 
         public List<TEntity> FindAll()
@@ -98,7 +110,13 @@ namespace BeiDream.PetaPoco {
 
         public List<TEntity> Find(IEnumerable<TKey> ids)
         {
-            throw new NotImplementedException();
+            Sql sql = new Sql();
+            foreach (var id in ids)
+            {
+                sql.WhereOR("Id=@0", id);
+            }
+            List<TEntity> entities = UnitOfWork.Fetch<TEntity>(sql);
+            return entities;
         }
     }
 }

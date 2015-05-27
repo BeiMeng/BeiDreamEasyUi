@@ -274,7 +274,7 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         }
         private void AddBefore(MenuViewModel dto)
         {
-            BeiDreamMenu beiDreamMenu = dto.ToEntity();
+            BeiDreamMenu beiDreamMenu = dto.ToEntity(new BeiDreamMenu());
             ValidateAddCodeRepeatAndTextRepeat(beiDreamMenu);
         }
         /// <summary>
@@ -302,7 +302,7 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         }
         private void UpdateBefore(MenuViewModel dto)
         {
-            BeiDreamMenu beiDreamMenu = dto.ToEntity();
+            BeiDreamMenu beiDreamMenu = ToEntity(dto);
             ValidateUpdateCodeRepeatAndTextRepeat(beiDreamMenu);
             if (!ValidateVersion(beiDreamMenu))
                 throw new ConcurrencyException();
@@ -410,7 +410,8 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         /// <param name="dto">数据传输对象</param>
         private BeiDreamMenu ToEntity(MenuViewModel dto)
         {
-            return dto.ToEntity();
+            BeiDreamMenu model = UnitOfWork.SingleOrDefault<BeiDreamMenu>(dto.Id.ToGuid());
+            return dto.ToEntity(model ?? new BeiDreamMenu());
         }
         /// <summary>
         /// 转换为数据传输对象

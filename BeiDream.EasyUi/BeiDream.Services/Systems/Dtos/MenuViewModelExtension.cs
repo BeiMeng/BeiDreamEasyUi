@@ -28,23 +28,20 @@ namespace BeiDream.Services.Systems.Dtos
             };
             return menuViewModel;
         }
-        public static BeiDreamMenu ToEntity(this MenuViewModel dto)
+        public static BeiDreamMenu ToEntity(this MenuViewModel dto, BeiDreamMenu beiDreamMenuModel)
         {
-            BeiDreamMenu beiDreamMenuModel = new BeiDreamMenu
-            {
-                Id = dto.Id.ToGuid(),
-                ParentId = dto.ParentId.ToGuid(),
-                Code = dto.Code,
-                Text = dto.Text,
-                Path = dto.Path,
-                Level = Conv.ToInt(dto.Level),
-                SortId = Conv.ToInt(dto.SortId),                
-                Url=dto.Url,
-                IconClass = dto.IconClass,
-                PinYin = dto.PinYin,
-                Enabled=dto.Enabled,
-                Version=dto.Version               
-            };
+            beiDreamMenuModel.Id = dto.Id.ToGuid();
+            beiDreamMenuModel.ParentId = dto.ParentId.ToGuid();
+            beiDreamMenuModel.Code = dto.Code;
+            beiDreamMenuModel.Text = dto.Text;
+            beiDreamMenuModel.Path = dto.Path;
+            beiDreamMenuModel.Level = Conv.ToInt(dto.Level);
+            beiDreamMenuModel.SortId = Conv.ToInt(dto.SortId);
+            beiDreamMenuModel.Url = dto.Url;
+            beiDreamMenuModel.IconClass = dto.IconClass;
+            beiDreamMenuModel.PinYin = dto.PinYin;
+            beiDreamMenuModel.Enabled = dto.Enabled;
+            beiDreamMenuModel.Version = dto.Version;
             return beiDreamMenuModel;
         }
     }

@@ -98,41 +98,27 @@ namespace BeiDream.Services.Systems.Commom {
             FileManager.Save();
         }
 
-        ///// <summary>
-        ///// 删除图标
-        ///// </summary>
-        ///// <param name="ids">图标编号集合</param>
-        ///// <param name="cssPath">图标Css的路径</param>
-        //public List<Icons> Delete(List<Guid> ids, string cssPath)
-        //{
-        //    ids.CheckNull( "ids" );
-        //    var result = new List<Icons>();
-        //    if ( ids.Count == 0 )
-        //        return result;
-        //    result = IconRepository.Find( ids );
-        //    RemoveFromRepository( result );
-        //    DeleteFiles( result );
-        //    RemoveCss( result, cssPath );
-        //    return result;
-        //}
-        ///// <summary>
-        ///// 删除文件集合
-        ///// </summary>
-        //private void DeleteFiles( IEnumerable<Icon> icons ) {
-        //    FileManager.DeleteFiles( icons.Select( t => Sys.GetPhysicalPath( t.Path ) ) );
-        //}
-
-        ///// <summary>
-        ///// 从Css文件中移除Css代码
-        ///// </summary>
-        //private void RemoveCss( IEnumerable<Icon> icons, string cssPath ) {
-        //    FileManager.FilePath = Sys.GetPhysicalPath( cssPath );
-        //    FileManager.Remove( icons.Select( t => t.Css ) );
-        //    FileManager.Save();
-        //}
-        public List<Icons> Delete(List<Guid> ids, string cssPath)
+        public void Delete(List<Icons> icons, string cssPath)
         {
-            throw new NotImplementedException();
+            DeleteFiles(icons);
+            RemoveCss(icons, cssPath);
+        }
+        /// <summary>
+        /// 删除文件集合
+        /// </summary>
+        private void DeleteFiles(IEnumerable<Icons> icons)
+        {
+            FileManager.DeleteFiles(icons.Select(t => Sys.GetPhysicalPath(t.Path)));
+        }
+
+        /// <summary>
+        /// 从Css文件中移除Css代码
+        /// </summary>
+        private void RemoveCss(IEnumerable<Icons> icons, string cssPath)
+        {
+            FileManager.FilePath = Sys.GetPhysicalPath( cssPath );
+            FileManager.Remove( icons.Select( t => t.Css ) );
+            FileManager.Save();
         }
     }
 }

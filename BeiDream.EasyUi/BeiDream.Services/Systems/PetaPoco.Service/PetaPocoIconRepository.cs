@@ -9,6 +9,7 @@ using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Commom;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
+using Util;
 
 namespace BeiDream.Services.Systems.PetaPoco.Service
 {
@@ -85,6 +86,22 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             sql.Where("Width=@0", width).Where("Height=@0", height);
             List<Icons> icons = UnitOfWork.Fetch<Icons>(sql);
             return icons.Select(ToDto).ToList();
+        }
+
+
+
+        public void DeleteIconsAndDeleteCss(List<Guid> ids, string cssPath)
+        {
+            if (ids != null && ids.Count > 0)
+            {
+                List<Icons> icons = Find(ids);
+                IconManager.Delete(icons, cssPath);
+                base.Remove(ids);
+            }
+            else
+            {
+                throw new Warning("请选择要删除的图标！");
+            }
         }
     }
 }

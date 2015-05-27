@@ -6,7 +6,6 @@
                 <div title="@p.Text" data-options="iconCls:'@p.IconClass'">
                     @Html.EasyUi().Tree("/Home/GetMenuTree?parentId=" + p.Id, "divMenuTree").Click("$.project.clickMainMenuNode")
                 </div>
-
             }
         </div>
     </div>

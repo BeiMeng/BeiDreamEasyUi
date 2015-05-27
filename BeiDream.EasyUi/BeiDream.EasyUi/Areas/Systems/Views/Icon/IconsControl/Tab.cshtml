@@ -26,7 +26,7 @@
             }
         </ul>
     }
-    using (x.LayoutRegion().Bottom().Height(32).AddStyle("background", "#A9FACD").Begin())
+    using (x.LayoutRegion().Bottom().Height(32).Begin())
     {
         @*分页*@
         @(Html.EasyUi().Pagination().PageList(50, 100, 200, 500).PageNumber(Model.Icons.CurrentPageIndex)

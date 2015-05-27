@@ -9,6 +9,7 @@ using BeiDream.Common.Page;
 using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
+using Util;
 using Util.Webs;
 using Util.Webs.EasyUi.Forms;
 using Util.Webs.EasyUi.Results;
@@ -54,7 +55,28 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
             IconRepository.UpLoadAndAddIcon(ConfigInfo.UploadIconPath,ConfigInfo.CssPath);
             return new EasyUiResult(StateCode.Ok, "操作成功").GetResult();
         }
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids">Id集合字符串，多个Id用逗号分隔</param>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [FormExceptionHandler]
+        [AjaxOnly]
+        public  ActionResult Delete(string ids)
+        {
+            IconRepository.DeleteIconsAndDeleteCss(ids.ToGuidList(),ConfigInfo.CssPath);
+            return new EasyUiResult(StateCode.Ok, "删除成功").GetResult();
+        }
+        /// <summary>
+        /// 查看详细
+        /// </summary>
+        /// <param name="id">实体编号</param>
+        public PartialViewResult Detail(string id)
+        {
+            IconViewModel model = IconRepository.Find(id.ToGuidList())[0].ToDto();
+            return PartialView("Parts/Icon.Detail", model);
+        }
         public ActionResult Query(QueryModel query)
         {
             List<IconViewModel> icons = IconRepository.GetAll();

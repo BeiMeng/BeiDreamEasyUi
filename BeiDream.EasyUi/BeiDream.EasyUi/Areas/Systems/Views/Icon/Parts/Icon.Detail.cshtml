@@ -1,0 +1,64 @@
+﻿@model BeiDream.Services.Systems.Dtos.IconViewModel
+
+<div class="divDetail">
+    <div class="detailTitle">图标信息</div>
+    <div class="detailContent">
+        <dl>
+            <dt>@Html.LabelFor( t => t.Size )</dt>
+            <dd>
+                @Model.Size
+            </dd>
+        </dl>
+        <dl >
+            <dt>@Html.LabelFor( t => t.Name )</dt>
+            <dd>
+                @Model.Name
+            </dd>
+        </dl>        
+        <dl>
+            <dt>@Html.LabelFor( t => t.ClassName )</dt>
+            <dd>
+                @Model.ClassName
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor( t => t.Width )</dt>
+            <dd>
+                @Model.Width
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor( t => t.Height )</dt>
+            <dd>
+                @Model.Height
+            </dd>
+        </dl>
+        <dl class="full">
+            <dt>@Html.LabelFor( t => t.Path )</dt>
+            <dd>
+                @Model.Path
+            </dd>
+        </dl>
+        <dl class="full">
+            <dt>@Html.LabelFor( t => t.Css )</dt>
+            <dd>
+                @Model.Css
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor( t => t.CreateTime )</dt>
+            <dd>
+                @Model.CreateTime.ToDateTimeString()
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor( t => t.Icon )</dt>
+            <dd>
+                <img src="@Model.Path"/>
+            </dd>
+        </dl>
+    </div>
+</div>
+<div id="dialogButtons">
+    @Html.EasyUi().DialogButton( "关 闭" ).Icon( "icon-cancel" ).Width( 90 ).CloseDialog()
+</div>

@@ -14,7 +14,7 @@
                .ShowEditDialogByDblClick("btnLook").Menu().Fit().FitColumns()
                .Columns(
                    x.GridColumn(t => t.Id).CheckBox(),
-                   x.GridColumn(t => t.Icon, 35).FormatImage(32, 32),
+                   x.GridColumn(t => t.Icon, 35).Align(AlignLeftRigthCenter.Center, AlignLeftRigthCenter.Center).FormatImage(32, 32),
                    x.GridColumn(t => t.Name, 180),
                    x.GridColumn(t => t.ClassName, 200),
                    x.GridColumn(t => t.Size, 80),
