@@ -19,12 +19,66 @@
             line-height: 23px;
             font-weight: bold;
         }
+        .ul_list, .accordion ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 10px;
+        }
+        .ul_list li, .accordion ul li {
+            padding: 0px;
+            margin-left: 0px;
+        }
+        .ul_list li a, .accordion ul li a {
+            line-height: 24px;
+            cursor: pointer;
+        }
+        .ul_list li div, .accordion ul li div {
+            margin: 2px 0px;
+            padding-left: 10px;
+            padding-top: 2px;
+            border: 1px solid #fff;
+        }
+        .ul_list li.hover, .accordion ul li div.hover {
+            border: 1px dashed #D69C00;
+            background: #FFE88C;
+            cursor: pointer;
+        }
+        .accordion ul li div.hover a {
+            color: #D16C00;
+            text-decoration: none;
+        }
+        .ul_list li.selected, .accordion ul li div.selected {
+            border: 1px solid #D69C00;
+            background: #FFE88C;
+            cursor: default;
+        }
+        .ul_list li.selected a, a.accordion ul li div.selected a {
+            color: #D16C00;
+            font-weight: bold;
+        }
+        .ul_list li {
+            border: 1px solid #fff;
+            margin-bottom: 1px;
+        }
     </style>
 }
 @section Scripts{
     <script src="~/Scripts/Projects/project.js"></script>
     <script type="text/javascript">
-        
+        $(function () {
+            var $obj = $('#wnav');
+            var panels = $obj.accordion('panels');
+            $obj.accordion('select', panels[0].panel('options').title);
+
+            $obj.find('li').click(function () {
+                $obj.find('li div').removeClass("selected");
+                $(this).children('div').addClass("selected");
+            }).hover(function () {
+                $(this).children('div').addClass("hover");
+            }, function () {
+                $(this).children('div').removeClass("hover");
+            });
+        });
     </script>
 }
 <body class="easyui-layout" fit="true" scroll="no">

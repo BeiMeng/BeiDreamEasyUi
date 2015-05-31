@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Applications.Services.Configs;
 using BeiDream.Common;
 using BeiDream.Common.Page;
+using BeiDream.EasyUi.Areas.Systems.QueryModels;
 using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
@@ -24,6 +25,9 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         }
 
         protected IIconRepositiory IconRepository { get; private set; }
+
+
+        #region 图标管理
         //
         // GET: /Systems/Icon/
 
@@ -31,7 +35,37 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids">Id集合字符串，多个Id用逗号分隔</param>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [FormExceptionHandler]
+        [AjaxOnly]
+        public ActionResult Delete(string ids)
+        {
+            IconRepository.DeleteIconsAndDeleteCss(ids.ToGuidList(), ConfigInfo.CssPath);
+            return new EasyUiResult(StateCode.Ok, "删除成功").GetResult();
+        }
+        /// <summary>
+        /// 查看详细
+        /// </summary>
+        /// <param name="id">实体编号</param>
+        public PartialViewResult Detail(string id)
+        {
+            IconViewModel model = IconRepository.Find(id.ToGuidList())[0].ToDto();
+            return PartialView("Parts/Icon.Detail", model);
+        }
+        public ActionResult Query(IconQueryModel query)
+        {
+            //List<IconViewModel> icons = IconRepository.GetAll();
+            PagedList<IconViewModel> result = query.Size == null ? IconRepository.PagedLists(query.Page, query.Rows, "") : IconRepository.PagedLists(query.Page, query.Rows, "WHERE width=@0 AND height=@1", query.Size.Split('*')[0], query.Size.Split('*')[1]);//new PagedList<IconViewModel>(icons, query.Page, query.Rows);
+            return new DataGridResult(result, result.TotalItemCount).GetResult();
+        } 
+        #endregion
 
+        #region 图标上传
         public PartialViewResult IconPanel()
         {
             return PartialView("Parts/IconPanel");
@@ -52,38 +86,12 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         [FormExceptionHandler]
         public ActionResult Upload()
         {
-            IconRepository.UpLoadAndAddIcon(ConfigInfo.UploadIconPath,ConfigInfo.CssPath);
+            IconRepository.UpLoadAndAddIcon(ConfigInfo.UploadIconPath, ConfigInfo.CssPath);
             return new EasyUiResult(StateCode.Ok, "操作成功").GetResult();
-        }
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="ids">Id集合字符串，多个Id用逗号分隔</param>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [FormExceptionHandler]
-        [AjaxOnly]
-        public  ActionResult Delete(string ids)
-        {
-            IconRepository.DeleteIconsAndDeleteCss(ids.ToGuidList(),ConfigInfo.CssPath);
-            return new EasyUiResult(StateCode.Ok, "删除成功").GetResult();
-        }
-        /// <summary>
-        /// 查看详细
-        /// </summary>
-        /// <param name="id">实体编号</param>
-        public PartialViewResult Detail(string id)
-        {
-            IconViewModel model = IconRepository.Find(id.ToGuidList())[0].ToDto();
-            return PartialView("Parts/Icon.Detail", model);
-        }
-        public ActionResult Query(QueryModel query)
-        {
-            List<IconViewModel> icons = IconRepository.GetAll();
-            PagedList<IconViewModel> result = new PagedList<IconViewModel>(icons, query.Page, query.Rows);
-            return new DataGridResult(result,result.TotalItemCount).GetResult();
-        }
+        } 
+        #endregion
 
+        #region 图标选择弹出层
         /// <summary>
         /// 选择图标控件
         /// </summary>
@@ -96,7 +104,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         /// 获取图标尺寸选项卡
         /// </summary>
         [AjaxOnly]
-        public PartialViewResult GetSizeTabs(QueryModel query)
+        public PartialViewResult GetSizeTabs(IconQueryModel query)
         {
             return PartialView("IconsControl/SizeTabs");
         }
@@ -108,12 +116,13 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         /// <param name="query">图标查询实体</param>
         /// <param name="width"></param>
         [AjaxOnly]
-        public PartialViewResult GetIconTab(int width,int height,QueryModel query)
+        public PartialViewResult GetIconTab(int width, int height, QueryModel query)
         {
             List<IconViewModel> icons = IconRepository.GetAllByQuery(width, height);
             PagedList<IconViewModel> result = new PagedList<IconViewModel>(icons, query.Page, query.Rows);
             IconListViewModel iconListViewModel = new IconListViewModel(width, height, result);
             return PartialView("IconsControl/Tab", iconListViewModel);
-        }
+        } 
+        #endregion
     }
 }

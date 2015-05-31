@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Areas\Systems\Controllers\IconController.cs" />
     <Compile Include="Areas\Systems\Controllers\MenuManageController.cs" />
+    <Compile Include="Areas\Systems\QueryModels\IconQueryModel.cs" />
     <Compile Include="Areas\Systems\SystemsAreaRegistration.cs" />
     <Compile Include="Controllers\DesktopController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -570,6 +571,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Systems\Views\Icon\Parts\Icon.Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Systems\Views\Icon\Parts\QueryForm.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -43,12 +43,12 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         {
             switch (loadMode)
             {
-                    case LoadMode.Async:
-                        return AsyncQueryLoad(query);
-                    case LoadMode.Sync:
-                        return SyncQueryLoad(query);
-                    default:
-                        return AsyncQueryLoad(query);
+                case LoadMode.Async:
+                    return AsyncQueryLoad(query);
+                case LoadMode.Sync:
+                    return SyncQueryLoad(query);
+                default:
+                    return AsyncQueryLoad(query);
             }
         }
         /// <summary>

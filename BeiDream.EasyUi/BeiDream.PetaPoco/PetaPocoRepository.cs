@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using BeiDream.Common;
+using BeiDream.Common.Page;
 
 namespace BeiDream.PetaPoco {
     /// <summary>
@@ -117,6 +118,25 @@ namespace BeiDream.PetaPoco {
             }
             List<TEntity> entities = UnitOfWork.Fetch<TEntity>(sql);
             return entities;
+        }
+
+
+        public virtual PagedList<dynamic> DynamicPagedList(int pageIndex, int pageSize, string sql, params object[] args)
+        {
+            var pageDate = UnitOfWork.Page<dynamic>(pageIndex, pageSize, sql, args);
+            return new PagedList<dynamic>(pageDate.Items, pageIndex, pageSize, (int)pageDate.TotalItems);
+        }
+
+        public virtual PagedList<TEntity> PagedList(int pageIndex, int pageSize, string sql, params object[] args)
+        {
+            var pageData = UnitOfWork.Page<TEntity>(pageIndex, pageSize, sql, args);
+            return new PagedList<TEntity>(pageData.Items, pageIndex, pageSize, (int)pageData.TotalItems);
+        }
+
+        public virtual PagedList<TDto> PagedList<TDto>(int pageIndex, int pageSize, string sql, params object[] args)
+        {
+            var pageData = UnitOfWork.Page<TDto>(pageIndex, pageSize, sql, args);
+            return new PagedList<TDto>(pageData.Items, pageIndex, pageSize, (int)pageData.TotalItems);
         }
     }
 }

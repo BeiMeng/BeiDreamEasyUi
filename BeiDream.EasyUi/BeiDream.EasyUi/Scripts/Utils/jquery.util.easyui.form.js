@@ -178,7 +178,8 @@
         function submitSuccess(result) {
             treeId = treeId || $.easyui.treeId;
             $.easyui.getById(treeId).tree("reload");
-            fnSuccess(result);
+            if (fnSuccess)
+                fnSuccess(result);
             $.easyui.closeDialog();
         }
     };

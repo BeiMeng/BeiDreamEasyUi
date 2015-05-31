@@ -8,9 +8,8 @@
     //多加一个Panel层是方便弹出层关闭后刷新页面使用，直接刷新grid目前无效
     using (@x.Panel().Id("panelIcon").Border(false).Padding(0, 0, 0, 0).Center().AddClass("content").Begin())
      {
-            @*查询表单*@
-            @*表格*@
-         @(x.Grid("grid").Sort("CreateTime").Url("/Systems/Icon/Query")
+         @*表格*@
+         @(x.Grid("grid").Sort("CreateTime").Toolbar("divQuery").Url("/Systems/Icon/Query")
                .ShowEditDialogByDblClick("btnLook").Menu().Fit().FitColumns()
                .Columns(
                    x.GridColumn(t => t.Id).CheckBox(),

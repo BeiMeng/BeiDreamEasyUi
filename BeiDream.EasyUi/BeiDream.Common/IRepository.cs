@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BeiDream.Common.Page;
 
 namespace BeiDream.Common {
     /// <summary>
@@ -51,6 +52,16 @@ namespace BeiDream.Common {
         /// </summary>
         /// <param name="ids">实体标识列表</param>
         List<TEntity> Find( IEnumerable<TKey> ids );
+
+        /// <summary>
+        /// 动态查询，返回dynamic类型的列表
+        /// 请使用标准SQL语句进行查询(SELECT ... FROM ...)
+        /// </summary> 
+        /// <returns></returns>
+        PagedList<dynamic> DynamicPagedList(int pageIndex, int pageSize, string sql, params object[] args);
+        PagedList<TEntity> PagedList(int pageIndex, int pageSize, string sql, params object[] args);
+
+        PagedList<TDto> PagedList<TDto>(int pageIndex, int pageSize, string sql, params object[] args);
         /// <summary>
         /// 获取工作单元
         /// </summary>

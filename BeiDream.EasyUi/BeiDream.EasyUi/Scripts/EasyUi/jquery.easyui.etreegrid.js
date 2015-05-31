@@ -25,14 +25,6 @@
                 }
             }
         });
-
-        setTimeout(function() {
-            var grid = $("table.easyui-treegrid-edit");
-            if (grid.attr("enableDrag")) {
-                grid.etreegrid('enableDnd');
-                level = $.toNumber(grid.attr("enableDrag"));
-            }
-        },800);
     });
 
     function buildGrid(target) {
@@ -272,6 +264,11 @@
                 $.data(this, 'etreegrid', {
                     options: $.extend({}, $.fn.etreegrid.defaults, $.fn.etreegrid.parseOptions(this), options)
                 });
+                var grid = $(this);
+                if (grid.attr("enableDrag")) {
+                    grid.etreegrid('enableDnd');
+                    level = $.toNumber(grid.attr("enableDrag"));
+                }
             }
             buildGrid(this);
         });

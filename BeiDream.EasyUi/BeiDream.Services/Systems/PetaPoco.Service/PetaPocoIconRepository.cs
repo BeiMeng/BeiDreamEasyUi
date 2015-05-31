@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BeiDream.Common;
+using BeiDream.Common.Page;
 using BeiDream.PetaPoco;
 using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Commom;
@@ -88,7 +89,11 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             return icons.Select(ToDto).ToList();
         }
 
-
+        public PagedList<IconViewModel> PagedLists(int pageIndex, int pageSize, string sql, params object[] args)
+        {
+            var pageData = UnitOfWork.Page<Icons>(pageIndex, pageSize, sql, args);
+            return new PagedList<IconViewModel>(pageData.Items.Select(ToDto).ToList(), pageIndex, pageSize, (int)pageData.TotalItems);
+        }
 
         public void DeleteIconsAndDeleteCss(List<Guid> ids, string cssPath)
         {

@@ -1,6 +1,6 @@
 ﻿@model ICollection<BeiDream.Services.Systems.Dtos.MenuViewModel>
     <div data-options="region:'west',title:'功能菜单',split:true,maxWidth:500" style="width:180px;">
-        <div class="easyui-accordion" data-options="fit:true,border:false">
+        <div id="wnav" class="easyui-accordion" data-options="fit:true,border:false">
             @foreach (var p in Model)
             {
                 <div title="@p.Text" data-options="iconCls:'@p.IconClass'">

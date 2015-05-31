@@ -1,0 +1,30 @@
+﻿@model BeiDream.EasyUi.Areas.Systems.QueryModels.IconQueryModel
+@{
+    var x = @Html.EasyUi();
+}
+<div id="divQuery" class="divQueryForm">
+    @using (x.Form("formQuery").AddClass("form").Begin())
+    {
+        <dl>
+            <dt>@Html.LabelFor(t => t.Size)</dt>
+            <dd>
+                @x.Combox(t => t.Size, "").Add("16*16", "16*16").Add("24*24", "24*24").Add("32*32", "32*32").Width(60)
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor(t => t.BeginCreateTime)</dt>
+            <dd>
+                @x.TextBox(t => t.BeginCreateTime)
+            </dd>
+        </dl>
+        <dl>
+            <dt>@Html.LabelFor(t => t.EndCreateTime)</dt>
+            <dd>
+                @x.TextBox(t => t.EndCreateTime)
+            </dd>
+        </dl>
+        <span class="button">
+            @x.Button("查 询").Width(70).Icon("icon-search").Query()
+        </span>
+    }
+</div>

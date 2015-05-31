@@ -36,6 +36,8 @@
         x.MenuItem("menuItem_Look", "查看详细", "icon-look"),
         x.MenuItem("menuItem_Refresh", "刷 新", "icon-refresh")
         )
+    @*查询表单*@
+    @Html.Partial("Parts/QueryForm")
       @Html.Action("IconPanel")
 }
 @section Scripts {
