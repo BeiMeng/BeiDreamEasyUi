@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BeiDream.Common;
 using BeiDream.Common.Page;
+using BeiDream.PetaPoco;
 using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Dtos;
 
@@ -17,8 +18,8 @@ namespace BeiDream.Services.Systems.IServices
 
         List<IconViewModel> GetAll();
 
-        List<IconViewModel> GetAllByQuery(int width,int height);
+        List<IconViewModel> GetAllByQuery(Sql sql);
 
-        PagedList<IconViewModel> PagedLists(int pageIndex, int pageSize, string sql, params object[] args);
+        PagedList<IconViewModel> PagedLists(int pageIndex, int pageSize,Sql sql);
     }
 }

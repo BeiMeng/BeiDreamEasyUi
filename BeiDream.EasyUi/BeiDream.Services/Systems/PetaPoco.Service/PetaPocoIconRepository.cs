@@ -81,17 +81,15 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         #endregion
 
 
-        public List<IconViewModel> GetAllByQuery(int width, int height)
+        public List<IconViewModel> GetAllByQuery(Sql sql)
         {
-            Sql sql=new Sql();
-            sql.Where("Width=@0", width).Where("Height=@0", height);
             List<Icons> icons = UnitOfWork.Fetch<Icons>(sql);
             return icons.Select(ToDto).ToList();
         }
 
-        public PagedList<IconViewModel> PagedLists(int pageIndex, int pageSize, string sql, params object[] args)
+        public PagedList<IconViewModel> PagedLists(int pageIndex, int pageSize,Sql sql)
         {
-            var pageData = UnitOfWork.Page<Icons>(pageIndex, pageSize, sql, args);
+            var pageData = UnitOfWork.Page<Icons>(pageIndex, pageSize, sql);
             return new PagedList<IconViewModel>(pageData.Items.Select(ToDto).ToList(), pageIndex, pageSize, (int)pageData.TotalItems);
         }
 

@@ -7,6 +7,7 @@ using Applications.Services.Configs;
 using BeiDream.Common;
 using BeiDream.Common.Page;
 using BeiDream.EasyUi.Areas.Systems.QueryModels;
+using BeiDream.PetaPoco;
 using BeiDream.PetaPoco.Models;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
@@ -59,8 +60,14 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         }
         public ActionResult Query(IconQueryModel query)
         {
-            //List<IconViewModel> icons = IconRepository.GetAll();
-            PagedList<IconViewModel> result = query.Size == null ? IconRepository.PagedLists(query.Page, query.Rows, "") : IconRepository.PagedLists(query.Page, query.Rows, "WHERE width=@0 AND height=@1", query.Size.Split('*')[0], query.Size.Split('*')[1]);//new PagedList<IconViewModel>(icons, query.Page, query.Rows);
+            Sql sql=new Sql();
+            if (query.Size != null)
+                sql.Where("Width=@0", query.Size.Split('*')[0]).Where("Height=@0", query.Size.Split('*')[1]);
+            if (query.BeginCreateTime != null)
+                sql.Where("CreateTime>@0", query.BeginCreateTime);
+            if (query.EndCreateTime != null)
+                sql.Where("CreateTime<@0", query.EndCreateTime);
+            PagedList<IconViewModel> result =IconRepository.PagedLists(query.Page, query.Rows, sql);//new PagedList<IconViewModel>(icons, query.Page, query.Rows);
             return new DataGridResult(result, result.TotalItemCount).GetResult();
         } 
         #endregion
@@ -104,7 +111,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         /// 获取图标尺寸选项卡
         /// </summary>
         [AjaxOnly]
-        public PartialViewResult GetSizeTabs(IconQueryModel query)
+        public PartialViewResult GetSizeTabs()
         {
             return PartialView("IconsControl/SizeTabs");
         }
@@ -118,8 +125,9 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         [AjaxOnly]
         public PartialViewResult GetIconTab(int width, int height, QueryModel query)
         {
-            List<IconViewModel> icons = IconRepository.GetAllByQuery(width, height);
-            PagedList<IconViewModel> result = new PagedList<IconViewModel>(icons, query.Page, query.Rows);
+            Sql sql = new Sql();
+            sql.Where("Width=@0", width).Where("Height=@0", height);
+            PagedList<IconViewModel> result = IconRepository.PagedLists(query.Page, query.Rows,sql);
             IconListViewModel iconListViewModel = new IconListViewModel(width, height, result);
             return PartialView("IconsControl/Tab", iconListViewModel);
         } 
