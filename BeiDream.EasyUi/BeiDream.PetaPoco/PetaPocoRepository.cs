@@ -9,7 +9,8 @@ namespace BeiDream.PetaPoco {
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">实体标识类型</typeparam>
-    public abstract class PetaPocoRepository<TEntity, TKey> : IRepository<TEntity,TKey> where TEntity : class {
+    public abstract class PetaPocoRepository<TEntity, TKey> : IPetaPocoRepositiory<TEntity, TKey> where TEntity : class
+    {
         /// <summary>
         /// 初始化仓储
         /// </summary>
@@ -109,12 +110,12 @@ namespace BeiDream.PetaPoco {
             return UnitOfWork.Fetch<TEntity>("");
         }
 
-        public List<TEntity> Find(IEnumerable<TKey> ids)
+        public List<TEntity> Find(IEnumerable<TKey> ids,string primaryKeyName)
         {
             Sql sql = new Sql();
             foreach (var id in ids)
             {
-                sql.WhereOR("Id=@0", id);
+                sql.WhereOR(primaryKeyName+"=@0", id);
             }
             List<TEntity> entities = UnitOfWork.Fetch<TEntity>(sql);
             return entities;
@@ -136,6 +137,30 @@ namespace BeiDream.PetaPoco {
         public virtual PagedList<TDto> PagedList<TDto>(int pageIndex, int pageSize, string sql, params object[] args)
         {
             var pageData = UnitOfWork.Page<TDto>(pageIndex, pageSize, sql, args);
+            return new PagedList<TDto>(pageData.Items, pageIndex, pageSize, (int)pageData.TotalItems);
+        }
+
+        public List<TEntity> FindByQuery(Sql sql)
+        {
+            return UnitOfWork.Fetch<TEntity>(sql);
+        }
+
+
+        public PagedList<dynamic> DynamicPagedList(int pageIndex, int pageSize, Sql sql)
+        {
+            var pageDate = UnitOfWork.Page<dynamic>(pageIndex, pageSize, sql);
+            return new PagedList<dynamic>(pageDate.Items, pageIndex, pageSize, (int)pageDate.TotalItems);
+        }
+
+        public PagedList<TEntity> PagedList(int pageIndex, int pageSize, Sql sql)
+        {
+            var pageData = UnitOfWork.Page<TEntity>(pageIndex, pageSize, sql);
+            return new PagedList<TEntity>(pageData.Items, pageIndex, pageSize, (int)pageData.TotalItems);
+        }
+
+        public PagedList<TDto> PagedList<TDto>(int pageIndex, int pageSize, Sql sql)
+        {
+            var pageData = UnitOfWork.Page<TDto>(pageIndex, pageSize, sql);
             return new PagedList<TDto>(pageData.Items, pageIndex, pageSize, (int)pageData.TotalItems);
         }
     }

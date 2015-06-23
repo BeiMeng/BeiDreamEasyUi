@@ -1,43 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 using BeiDream.Common;
 using Util.Webs.EasyUi.Trees;
 
-namespace BeiDream.Services.Systems.Dtos
+namespace BeiDream.Services.CalibrationManagement.Dots
 {
-    public class MenuViewModel : DomainBase, ITreeNode, IDto
+    public class ParameterViewModel :DomainBase, ITreeNode, IDto
     {
         public string Id { get; set; }
 
         public string ParentId { get; set; }
 
         /// <summary>
-        /// 编码
+        /// 参数名称
         /// </summary>
-        [Required(ErrorMessage = "编码不能为空")]
-        [StringLength(10, ErrorMessage = "编码输入过长，不能超过10位")]
-        [Display(Name = "编码")]
-        [DataMember]
-        public string Code { get; set; }
-        /// <summary>
-        /// 菜单名称
-        /// </summary>
-        [Required(ErrorMessage = "菜单名称不能为空")]
-        [StringLength(200, ErrorMessage = "菜单名称输入过长，不能超过50位")]
-        [Display(Name = "菜单名称")]
+        [Required(ErrorMessage = "参数名称不能为空")]
+        [StringLength(200, ErrorMessage = "参数名称输入过长，不能超过100位")]
+        [Display(Name = "参数名称")]
         [DataMember]
         public string Text { get; set; }
         public string Path { get; set; }
-        /// <summary>
-        /// 图标
-        /// </summary>
-        [Required(ErrorMessage = "图标不能为空")]
-        [Display(Name = "图标")]
-        [DataMember]
-        public string IconClass { get; set; }
-        public string iconCls { get; set; }
         public int Level { get; set; }
         /// <summary>
         /// 排序号
@@ -46,32 +33,19 @@ namespace BeiDream.Services.Systems.Dtos
         [Display(Name = "排序号")]
         [DataMember]
         public int SortId { get; set; }
-
         /// <summary>
-        /// 拼音简码
+        /// 描述信息
         /// </summary>
-        [Display(Name = "拼音简码")]
+        [Display(Name = "描述信息")]
         [DataMember]
-        public string PinYin { get; set; }
+        public string Description { get; set; }
         /// <summary>
-        /// 更新时间
+        /// 创建时间
         /// </summary>
-        [Required(ErrorMessage = "更新时间不能为空")]
-        [Display(Name = "更新时间")]
+        [Required(ErrorMessage = "创建时间不能为空")]    //可以不需要，这个字段是后台字段赋值，前台只是显示也不可编辑
+        [Display(Name = "创建时间")]
         [DataMember]
-        public DateTime? UpdateTime { get; set; }
-
-        public bool? Checked { get; set; }
-
-        public object Attributes { get; set; }
-
-        /// <summary>
-        /// 控制器路径
-        /// </summary>
-        [Display(Name = "控制器路径")]
-        [DataMember]
-        public string Url { get; set; }
-
+        public DateTime? CreateTime { get; set; }
         /// <summary>
         /// 启用
         /// </summary>
@@ -79,7 +53,9 @@ namespace BeiDream.Services.Systems.Dtos
         [Display(Name = "启用")]
         [DataMember]
         public bool Enabled { get; set; }
-
+        /// <summary>
+        /// 是否展开子节点
+        /// </summary>
         public string state { get; set; }
 
         public List<ITreeNode> children { get; set; }

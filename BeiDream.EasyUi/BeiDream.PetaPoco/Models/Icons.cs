@@ -47,11 +47,28 @@ namespace BeiDream.PetaPoco.Models
         /// </summary>
         [Column]
         public int Height { get; set; }
+        [Column]
+        public string CreatePerson { get; set; }
+        [Column]
+        public override DateTime? CreateTime { get; set; }
         /// <summary>
         /// 版本号
         /// </summary>
         [ResultColumn]
-        public byte[] Version { get; set; }
+        public override byte[] Version { get; set; }
+
+        public void Init()
+        {
+            if (CreateTime == null)
+                CreateTime = DateTime.Now;
+            CreatePerson = "BeiDream";
+        }
+
+        public void AddInit()
+        {
+            Init();
+            Id = Guid.NewGuid();
+        }
 
         /// <summary>
         /// 生成Css

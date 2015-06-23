@@ -11,7 +11,7 @@ using BeiDream.Services.Systems.Dtos;
 
 namespace BeiDream.Services.Systems.IServices
 {
-    public interface IIconRepositiory : IRepository<Icons, Guid>
+    public interface IIconRepositiory : IRepositiory<Icons, Guid>
     {
         void UpLoadAndAddIcon(string uploadIconPath, string cssPath);
         void DeleteIconsAndDeleteCss(List<Guid> ids,string cssPath);

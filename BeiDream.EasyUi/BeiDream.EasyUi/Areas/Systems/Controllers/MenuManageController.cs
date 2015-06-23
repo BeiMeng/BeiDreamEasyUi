@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BeiDream.Common;
 using BeiDream.Common.Page;
+using BeiDream.EasyUi.Areas.Common;
 using BeiDream.EasyUi.Controllers;
+using BeiDream.PetaPoco;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
 using Util;
@@ -24,7 +27,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         }
 
         protected IMenuRepository MenuRepository { get; private set; }
-        private const LoadMode loadMode = LoadMode.Sync;
+        private const LoadMode MenuLoadMode = LoadMode.Sync;
         //
         // GET: /Systems/MenuManage/
 
@@ -41,7 +44,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
 
         public ActionResult Query(QueryModel query)
         {
-            switch (loadMode)
+            switch (MenuLoadMode)
             {
                 case LoadMode.Async:
                     return AsyncQueryLoad(query);
@@ -58,8 +61,8 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         /// <returns></returns>
         private ActionResult SyncQueryLoad(QueryModel query)
         {
-            List<MenuViewModel> treeNodes = MenuRepository.GetAllTreeNodes();
-            SetState(treeNodes);
+            List<MenuViewModel> treeNodes = MenuRepository.FindByQuery(Sql.Builder.OrderBy("SortId ASC")).Select(menu => menu.ToDto()).ToList();
+            CommonHelper.SetState(treeNodes,MenuLoadMode);
             PagedList<MenuViewModel> result = new PagedList<MenuViewModel>(treeNodes, query.Page, query.Rows);
             return new TreeGridResult(result, true, result.TotalItemCount).GetResult();
         }
@@ -73,35 +76,16 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
             List<MenuViewModel> treeNodes;
             if (query.Id == null)
             {
-                treeNodes = MenuRepository.GetNavigationMenu();
-                SetState(treeNodes);
+                treeNodes = MenuRepository.GetAllTopLevel().Select(menu=>menu.ToDto()).ToList();
+                CommonHelper.SetState(treeNodes, MenuLoadMode);
                 PagedList<MenuViewModel> result = new PagedList<MenuViewModel>(treeNodes, query.Page, query.Rows);
                 return new TreeGridResult(result, true, result.TotalItemCount).GetResult();
             }
             else
             {
-                treeNodes = MenuRepository.GetMenuManageChildrenNodes(query.Id);
-                SetState(treeNodes);
+                treeNodes = MenuRepository.GetChidrenLevel(new Guid(query.Id)).Select(menu => menu.ToDto()).ToList();
+                CommonHelper.SetState(treeNodes, MenuLoadMode);
                 return new TreeGridResult(treeNodes, true, -1).GetResult();
-            }
-        }
-
-        private void SetState(List<MenuViewModel> treeNodes)
-        {
-            foreach (var treeNode in treeNodes)
-            {
-                switch (loadMode)
-                {
-                    case LoadMode.Async:
-                        treeNode.state = "closed";
-                        break;
-                    case LoadMode.Sync:
-                        treeNode.state = "open";
-                        break;
-                    default:
-                       treeNode.state = "closed";
-                       break;
-                }
             }
         }
 
@@ -111,7 +95,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
             var listUpdate = Util.Json.ToObject<List<MenuViewModel>>(updateList);
             var listDelete = Util.Json.ToObject<List<MenuViewModel>>(deleteList);
             var data = MenuRepository.Save(listAdd, listUpdate, listDelete);
-            SetState(data);
+            CommonHelper.SetState(data, MenuLoadMode);
             return new EasyUiResult(StateCode.Ok, "操作成功", data).GetResult();
         }
     }

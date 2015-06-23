@@ -7,7 +7,7 @@ namespace BeiDream.Common {
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">实体标识类型</typeparam>
-    public interface IRepository<TEntity, in TKey> where TEntity : class {
+    public interface IRepositiory<TEntity, in TKey> where TEntity : class {
         /// <summary>
         /// 添加实体
         /// </summary>
@@ -47,11 +47,13 @@ namespace BeiDream.Common {
         /// 查找实体集合
         /// </summary>
         List<TEntity> FindAll();
+
         /// <summary>
         /// 查找实体列表
         /// </summary>
         /// <param name="ids">实体标识列表</param>
-        List<TEntity> Find( IEnumerable<TKey> ids );
+        /// <param name="primaryKeyName">主键名称</param>
+        List<TEntity> Find(IEnumerable<TKey> ids, string primaryKeyName);
 
         /// <summary>
         /// 动态查询，返回dynamic类型的列表

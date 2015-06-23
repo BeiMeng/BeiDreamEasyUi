@@ -30,7 +30,7 @@ namespace BeiDream.EasyUi.Controllers
 
         public ActionResult LeftMenu()
         {
-            List<MenuViewModel> treeNodes = MenuRepository.GetNavigationMenu();
+            List<MenuViewModel> treeNodes = MenuRepository.GetAllTopLevel().Select(menu => menu.ToDto()).ToList();
             return PartialView("Left", treeNodes);
         }
 

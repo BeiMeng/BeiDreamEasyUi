@@ -55,7 +55,7 @@ namespace BeiDream.EasyUi.Areas.Systems.Controllers
         /// <param name="id">实体编号</param>
         public PartialViewResult Detail(string id)
         {
-            IconViewModel model = IconRepository.Find(id.ToGuidList())[0].ToDto();
+            IconViewModel model = IconRepository.Find(id.ToGuidList(),"Id")[0].ToDto();
             return PartialView("Parts/Icon.Detail", model);
         }
         public ActionResult Query(IconQueryModel query)

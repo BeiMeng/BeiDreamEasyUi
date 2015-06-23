@@ -39,7 +39,7 @@ namespace Util.Webs.EasyUi.Trees {
         /// <summary>
         /// 级数
         /// </summary>
-        public int? Level { get; set; }
+        public int Level { get; set; }
         /// <summary>
         /// 是否选中
         /// </summary>
@@ -64,5 +64,8 @@ namespace Util.Webs.EasyUi.Trees {
         [Json( NullValueHandling = NullValueHandling.Ignore )]
         [DataMember]
         public List<ITreeNode> children { get; set; }
+
+
+        public int SortId { get; set; }
     }
 }

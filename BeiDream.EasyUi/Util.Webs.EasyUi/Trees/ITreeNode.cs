@@ -20,7 +20,11 @@ namespace Util.Webs.EasyUi.Trees {
         /// <summary>
         /// 级数
         /// </summary>
-        int? Level { get; set; }
+        int Level { get; set; }
+        /// <summary>
+        /// 同级排序号
+        /// </summary>
+        int SortId { get; set; }
         /// <summary>
         /// 状态
         /// </summary>

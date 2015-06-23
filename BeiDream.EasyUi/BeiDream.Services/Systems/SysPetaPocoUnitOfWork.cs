@@ -7,7 +7,7 @@ using BeiDream.PetaPoco;
 
 namespace BeiDream.Services.Systems
 {
-    public class SysPetaPocoUnitOfWork : PetaPocoUnitOfWork
+    public class SysPetaPocoUnitOfWork : PetaPocoUnitOfWork, ISysPetaPocoUnitOfWork
     {
         public SysPetaPocoUnitOfWork()
             : base("Sys")

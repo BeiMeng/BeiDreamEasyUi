@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BeiDream.Common;
 using BeiDream.PetaPoco;
-using BeiDream.PetaPoco.Models;
-using Util.Webs.EasyUi.Trees;
 
-namespace BeiDream.Services.Common
+namespace BeiDream.Services.ServiceHelper
 {
     /// <summary>
     /// 修正增改数据的Path和level
@@ -15,6 +12,7 @@ namespace BeiDream.Services.Common
     {
         #region 字段
 
+        private readonly string _primaryKeyName;
         /// <summary>
         /// 需要更新路径的实体列表
         /// </summary>
@@ -37,11 +35,12 @@ namespace BeiDream.Services.Common
 
         protected PetaPocoUnitOfWork UnitOfWork;
 
-        public TreeServiceHelper(List<TEntity> addList, List<TEntity> updateList, PetaPocoUnitOfWork unitOfWork)
+        public TreeServiceHelper(List<TEntity> addList, List<TEntity> updateList, PetaPocoUnitOfWork unitOfWork,string primaryKeyName)
         {
             this.AddList = addList;
             this.UpdateList = updateList;
             this.UnitOfWork = unitOfWork;
+            this._primaryKeyName = primaryKeyName;
             _pathChangeList = new List<TEntity>();
             _updatedPathIds = new List<TKey>();
             var parentChangeList = GetParentChanges();
@@ -98,7 +97,7 @@ namespace BeiDream.Services.Common
         {
             Sql sql = new Sql();
             sql.Where("Path like @0", parent.Path + "%");
-            sql.Where("Id <>@0", parent.Id);
+            sql.Where(this._primaryKeyName+" <>@0", parent.Id);
             sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
             List<TEntity> list = UnitOfWork.Fetch<TEntity>(sql);
             return list.Where(t => !t.Id.Equals(parent.Id)).ToList();

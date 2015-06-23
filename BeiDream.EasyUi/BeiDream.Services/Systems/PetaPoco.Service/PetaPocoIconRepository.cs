@@ -19,7 +19,7 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         /// 初始化仓储
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="iconManager"></param>
-        public PetaPocoIconRepository(IUnitOfWork unitOfWork, IIconManager iconManager)
+        public PetaPocoIconRepository(ISysPetaPocoUnitOfWork unitOfWork, IIconManager iconManager)
             : base(unitOfWork)
         {
             this.IconManager = iconManager;
@@ -37,25 +37,9 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         public void UpLoadAndAddIcon(string uploadIconPath, string cssPath)
         {
             Icons entity = IconManager.Upload(uploadIconPath,cssPath);
+            entity.AddInit();
             Add(entity);
         }
-        /// <summary>
-        /// 新增初始化
-        /// </summary>
-        /// <param name="addModel"></param>
-        private void AddInit(Icons addModel)
-        {
-            addModel.Id=Guid.NewGuid();
-            addModel.CreatePerson = "BeiDrem";
-            addModel.CreateTime = DateTime.Now;
-        }
-        public override void Add(Icons entity)
-        {
-            AddInit(entity);
-            base.Add(entity);
-        }
-
-
         public List<IconViewModel> GetAll()
         {
             List<Icons> icons = FindAll();
@@ -97,7 +81,7 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         {
             if (ids != null && ids.Count > 0)
             {
-                List<Icons> icons = Find(ids);
+                List<Icons> icons = Find(ids,"Id");
                 IconManager.Delete(icons, cssPath);
                 base.Remove(ids);
             }

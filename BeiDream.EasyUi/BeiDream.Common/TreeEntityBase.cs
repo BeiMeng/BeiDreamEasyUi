@@ -9,11 +9,13 @@ namespace BeiDream.Common
 {
     public class TreeEntityBase<TKey,TParentId>:EntityBase<TKey>
     {
-                [Column]
+        [Column]
         public TParentId ParentId { get; set; }
-                [Column]
+        [Column]
         public string Path { get; set; }
-                [Column]
+        [Column]
         public int Level { get; set; }
+        [Column]
+        public int SortId { get; set; }
     }
 }

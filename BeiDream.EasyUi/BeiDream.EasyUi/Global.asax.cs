@@ -10,6 +10,9 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using BeiDream.Common;
+using BeiDream.Services.CalibrationManagement;
+using BeiDream.Services.CalibrationManagement.IServices;
+using BeiDream.Services.CalibrationManagement.PetaPoco.Service;
 using BeiDream.Services.Systems;
 using BeiDream.Services.Systems.Commom;
 using BeiDream.Services.Systems.Configs;
@@ -36,9 +39,12 @@ namespace BeiDream.EasyUi
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             //builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
             //    .AsImplementedInterfaces();
-            builder.RegisterType<SysPetaPocoUnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<SysPetaPocoUnitOfWork>().As<ISysPetaPocoUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<PetaPocoMenuRepository>().As<IMenuRepository>().InstancePerLifetimeScope();
             builder.RegisterType<PetaPocoIconRepository>().As<IIconRepositiory>().InstancePerLifetimeScope();
+
+            builder.RegisterType<ClmPetaPocoUnitOfWork>().As<IClmPetaPocoUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<PetaPocoParameterRepository>().As<IParameterRepository>().InstancePerLifetimeScope();
             builder.RegisterType<IconManager>().As<IIconManager>().InstancePerLifetimeScope();
             builder.RegisterType<TenantUploadPathStrategy>().As<IUploadPathStrategy>().SingleInstance();
             builder.RegisterType<FileUpload>().As<IFileUpload>().InstancePerLifetimeScope();

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using BeiDream.Common;
 
 namespace BeiDream.Services.Systems.Dtos
 {
-    public class IconViewModel
+    public class IconViewModel: IDto
     {
         /// <summary>
         /// 标识
@@ -87,7 +88,7 @@ namespace BeiDream.Services.Systems.Dtos
         [Required(ErrorMessage = "创建时间不能为空")]
         [Display(Name = "创建时间")]
         [DataMember]
-        public DateTime CreateTime { get; set; }
+        public DateTime? CreateTime { get; set; }
 
         /// <summary>
         /// 版本号

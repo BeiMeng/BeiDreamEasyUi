@@ -7,14 +7,13 @@ using BeiDream.Common.PetaPoco;
 
 namespace BeiDream.Common
 {
-    public class EntityBase<TKey>
+    public class EntityBase<TKey> : DomainBase
     {
-        [Column]
-        public TKey Id { get; set; }
-        [Column]
-        public string CreatePerson { get; set; }
-        [Column]
-        public DateTime CreateTime { get; set; }
+        public virtual TKey Id { get; set; }
+
+        public virtual DateTime? CreateTime { get; set; }
+
+        public virtual byte[] Version { get; set; }
 
     }
 }

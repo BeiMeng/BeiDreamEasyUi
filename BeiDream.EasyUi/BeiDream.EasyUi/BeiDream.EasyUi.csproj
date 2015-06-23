@@ -125,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Areas\CalibrationManagement\CalibrationManagementAreaRegistration.cs" />
+    <Compile Include="Areas\CalibrationManagement\Controllers\ParameterManageController.cs" />
+    <Compile Include="Areas\Common\CommonHelper.cs" />
     <Compile Include="Areas\Systems\Controllers\IconController.cs" />
     <Compile Include="Areas\Systems\Controllers\MenuManageController.cs" />
     <Compile Include="Areas\Systems\QueryModels\IconQueryModel.cs" />
@@ -534,6 +537,8 @@
     <Content Include="Areas\Systems\Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\CalibrationManagement\Models\" />
+    <Folder Include="Areas\CalibrationManagement\Views\Shared\" />
     <Folder Include="Areas\Systems\Views\Shared\" />
     <Folder Include="Css\icons-upload\images\" />
   </ItemGroup>
@@ -574,6 +579,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Systems\Views\Icon\Parts\QueryForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\CalibrationManagement\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\CalibrationManagement\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\CalibrationManagement\Views\ParameterManage\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

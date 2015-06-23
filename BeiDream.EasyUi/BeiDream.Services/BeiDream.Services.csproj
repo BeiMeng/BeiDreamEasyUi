@@ -43,7 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\BizPetaPocoUnitOfWork.cs" />
-    <Compile Include="Common\TreeServiceHelper.cs" />
+    <Compile Include="CalibrationManagement\ClmPetaPocoUnitOfWork.cs" />
+    <Compile Include="CalibrationManagement\Dots\ParameterViewModel.cs" />
+    <Compile Include="CalibrationManagement\Dots\ParameterViewModelExtension.cs" />
+    <Compile Include="CalibrationManagement\IClmPetaPocoUnitOfWork.cs" />
+    <Compile Include="CalibrationManagement\IServices\IParameterRepository.cs" />
+    <Compile Include="CalibrationManagement\PetaPoco.Service\PetaPocoParameterRepository.cs" />
+    <Compile Include="ServiceHelper\CommonHelper.cs" />
+    <Compile Include="ServiceHelper\TreeServiceHelper.cs" />
     <Compile Include="Systems\Commom\IconManager.cs" />
     <Compile Include="Systems\Commom\IIconManager.cs" />
     <Compile Include="Systems\Configs\ConfigInfo.cs" />
@@ -55,6 +62,7 @@
     <Compile Include="Systems\Dtos\MenuViewModelExtension.cs" />
     <Compile Include="Systems\IServices\IIconRepositiory.cs" />
     <Compile Include="Systems\IServices\IMenuRepository.cs" />
+    <Compile Include="Systems\ISysPetaPocoUnitOfWork.cs" />
     <Compile Include="Systems\PetaPoco.Service\PetaPocoIconRepository.cs" />
     <Compile Include="Systems\PetaPoco.Service\PetaPocoMenuRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +87,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Business\IServices\" />
     <Folder Include="Systems\EF.Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

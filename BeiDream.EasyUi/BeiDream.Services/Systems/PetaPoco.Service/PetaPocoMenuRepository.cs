@@ -4,7 +4,7 @@ using System.Linq;
 using BeiDream.Common;
 using BeiDream.PetaPoco;
 using BeiDream.PetaPoco.Models;
-using BeiDream.Services.Common;
+using BeiDream.Services.ServiceHelper;
 using BeiDream.Services.Systems.Dtos;
 using BeiDream.Services.Systems.IServices;
 using Util;
@@ -13,74 +13,13 @@ using Util.Webs.EasyUi.Trees;
 
 namespace BeiDream.Services.Systems.PetaPoco.Service
 {
-    public class PetaPocoMenuRepository : PetaPocoRepository<BeiDreamMenu, Guid>, IMenuRepository
+    public class PetaPocoMenuRepository : PetaPocoTreeRepositiory<BeiDreamMenu,Guid,Guid?>, IMenuRepository
     {
         /// 初始化仓储
         /// <param name="unitOfWork">工作单元</param>
-        public PetaPocoMenuRepository(IUnitOfWork unitOfWork)
+        public PetaPocoMenuRepository(ISysPetaPocoUnitOfWork unitOfWork)
             : base(unitOfWork)
         {
-        }
-        public List<MenuViewModel> GetNavigationMenu()
-        {
-            
-            Sql sql = new Sql();
-            sql.Where("Level=@0", 1);
-            sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            return menus.Select(menu => menu.ToDto()).ToList();
-        }
-
-        public List<MenuViewModel> GetAllChildrenMenuByPath(string parentId)
-        {
-            List<MenuViewModel> treeNodes = new List<MenuViewModel>();
-            Sql sql = new Sql();
-            sql.Where("Path like @0", parentId + "%");
-            sql.Where("Id <>@0", parentId);
-            sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            foreach (var menu in menus)
-            {
-                MenuViewModel treeNode = new MenuViewModel
-                {
-                    Id = menu.Id.ToString(),
-                    Text = menu.Text,
-                    IconClass = menu.IconClass,
-                    ParentId = parentId
-                };
-                if (menu.Url != null)
-                    treeNode.Attributes = new { url = menu.Url };
-                treeNodes.Add(menu.ToDto());
-            }
-            return treeNodes;
-        }
-        /// <summary>
-        /// 根据导航菜单ID获取其下面的菜单树(通过查找物理路径方式)
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
-        public List<ITreeNode> GetNavigationMenuTreeByPath(string parentId)
-        {
-            List<ITreeNode> treeNodes = new List<ITreeNode>();
-            Sql sql = new Sql();
-            sql.Where("Path like @0", parentId + "%");
-            sql.Where("Id <>@0", parentId);
-            sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            foreach (var menu in menus)
-            {
-                TreeNode treeNode = new TreeNode
-                {
-                    Id = menu.Id.ToString(),
-                    Text = menu.Text,
-                    IconClass = menu.IconClass,
-                    ParentId = menu.ParentId.ToString()
-                };
-                if (menu.Url != null)
-                    treeNode.Attributes = new { url = menu.Url };
-                treeNodes.Add(treeNode);
-            }
-            return treeNodes;
         }
         /// <summary>
         /// 根据导航菜单ID获取其下面的菜单树(通过递归查询子节点方式)
@@ -92,18 +31,18 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             List<ITreeNode> treeNodes = GetNavigationMenuChildrenNodes(parentId);
             return GetTreeChildren(treeNodes);
         }
-        /// <summary>
-        /// 根据父ID找到其下的导航菜单子节点(只是子节点)
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
+         //<summary>
+         //根据父ID找到其下的导航菜单子节点(只是子节点)
+         //</summary>
+         //<param name="parentId"></param>
+         //<returns></returns>
         public List<ITreeNode> GetNavigationMenuChildrenNodes(string parentId)
         {
             List<ITreeNode> treeNodes = new List<ITreeNode>();
             Sql sql = new Sql();
             sql.Where("ParentId=@0", parentId);
             sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
+            List<BeiDreamMenu> menus = this.FindByQuery(sql);
             foreach (var menu in menus)
             {
                 TreeNode treeNode = new TreeNode
@@ -133,71 +72,7 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             }
             return treeList;
         }
-        /// <summary>
-        /// 根据父ID找到其下的菜单管理子节点
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
-        public List<MenuViewModel> GetMenuManageChildrenNodes(string parentId)
-        {
-            Sql sql = new Sql();
-            sql.Where("ParentId=@0", parentId);
-            sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            return menus.Select(menu => menu.ToDto()).ToList();
-        }
-        /// <summary>
-        /// 获取所有的菜单管理树节点
-        /// </summary>
-        /// <returns></returns>
-        public List<MenuViewModel> GetAllTreeNodes()
-        {
-            Sql sql = new Sql();
-            sql.OrderBy("SortId ASC");   //默认ASC升序，降序为DESC
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            return menus.Select(menu => menu.ToDto()).ToList();
-        }
 
-
-        #region 新增的一系列操作
-        /// <summary>
-        /// 新增初始化
-        /// </summary>
-        /// <param name="addModel"></param>
-        private void AddInit(BeiDreamMenu addModel)
-        {
-            addModel.CreatePerson = "BeiDrem";
-            addModel.CreateTime = DateTime.Now;
-            addModel.PinYin = Str.PinYin(addModel.Text);
-        }
-        public override void Add(BeiDreamMenu beiDreamMenu)
-        {
-            AddInit(beiDreamMenu);
-            UnitOfWork.Insert(beiDreamMenu);
-        }
-        #endregion
-
-        public void Delete(BeiDreamMenu beiDreamMenu)
-        {
-            UnitOfWork.Delete(beiDreamMenu);
-        }
-        #region 更新的一系列操作
-        /// <summary>
-        /// 更新初始化
-        /// </summary>
-        /// <param name="updateModel"></param>
-        private void UpdateInit(BeiDreamMenu updateModel)
-        {
-            updateModel.UpdatePerson = "BeiDrem";
-            updateModel.UpdateTime = DateTime.Now;
-            updateModel.PinYin = Str.PinYin(updateModel.Text);
-        }
-        public override void Update(BeiDreamMenu beiDreamMenu)
-        {
-            UpdateInit(beiDreamMenu);
-            UnitOfWork.Update(beiDreamMenu);
-        }
-        #endregion
         /// <summary>
         /// 保存操作
         /// </summary>
@@ -207,75 +82,55 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         /// <returns></returns>
         public List<MenuViewModel> Save(List<MenuViewModel> addList, List<MenuViewModel> updateList, List<MenuViewModel> deleteList)
         {
-            SaveBefore(addList, updateList, deleteList);
-            var _addList = addList.Select(ToEntity).Distinct().ToList();
-            var _updateList = updateList.Select(ToEntity).Distinct().ToList();
-            var _deleteList = deleteList.Select(ToEntity).Distinct().ToList();
+            ViewModelHandle(addList, updateList, deleteList);
+            List<BeiDreamMenu> addEntityList = AddEntitysHandle(addList);
+            List<BeiDreamMenu> updateEntityList = UpdateEntitysHandle(updateList);
+            List<BeiDreamMenu> deleteEntityList = DeleteEntitysHandle(deleteList);
             //修正增改数据的Path和level
-            new TreeServiceHelper<BeiDreamMenu,Guid,Guid?>(_addList, _updateList, UnitOfWork);
-            List<string> ids = GetIds(_addList, _updateList, _deleteList);
-            #region 保存操作数据到数据库的事,物
-            UnitOfWork.Start();
-            try
-            {
-                foreach (var addModel in _addList)
-                {
-                    AddInit(addModel);
-                    UnitOfWork.Insert(addModel);
-                }
-                foreach (var updateModel in _updateList)
-                {
-                    UpdateInit(updateModel);
+            new TreeServiceHelper<BeiDreamMenu, Guid, Guid?>(addEntityList, updateEntityList, UnitOfWork, "Id");
 
-                    UnitOfWork.Update(updateModel);
-                }
-                foreach (var deleteModel in _deleteList)
-                {
-                    UnitOfWork.Delete<BeiDreamMenu>(deleteModel.Id);
-                    List<MenuViewModel> childrenMenus = this.GetAllChildrenMenuByPath(deleteModel.Id.ToString());
-                    if (childrenMenus == null || childrenMenus.Count == 0)
-                        continue;
-                    else
-                    {
-                        foreach (var childrenMenu in childrenMenus)
-                        {
-                            UnitOfWork.Delete<BeiDreamMenu>((object)childrenMenu.Id);
-                        }
-                    }
-                }
-                UnitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                UnitOfWork.AbortTransaction();
-                throw new Warning(ex);
-            }
-            #endregion
-            Sql sql = new Sql();
-            foreach (var id in ids)
-            {
-                sql.WhereOR("Id=@0", id);
-            }
-            List<BeiDreamMenu> returnList = UnitOfWork.Fetch<BeiDreamMenu>(sql);
-            return returnList.Select(ToDto).ToList();
+            SaveData(addEntityList, updateEntityList, deleteEntityList);
+
+            //返回被编过的视图数据，供前台使用
+            List<string> ids = CommonHelper.GetIds(addEntityList, updateEntityList, deleteEntityList);
+            List<Guid> gids = ids.Select(id => id.ToGuid()).ToList();
+            var parameterList = Find(gids, "Id");
+            return parameterList.Select(parameter => parameter.ToDto()).ToList();
         }
+        #region 前台视图数据的验证及过滤操作
         /// <summary>
-        /// 保存前操作
+        /// 对前台数据的处理,1.过滤无效数据，2.服务端视图实体数据验证(即用户输入的数据服务器验证)
         /// </summary>
         /// <param name="addList">新增列表</param>
         /// <param name="updateList">修改列表</param>
         /// <param name="deleteList">删除列表</param>
-        private void SaveBefore(List<MenuViewModel> addList, List<MenuViewModel> updateList, List<MenuViewModel> deleteList)
+        private void ViewModelHandle(List<MenuViewModel> addList, List<MenuViewModel> updateList, List<MenuViewModel> deleteList)
         {
-            FilterList(addList, deleteList);
-            FilterList(updateList, deleteList);
-            addList.ForEach(AddBefore);
-            updateList.ForEach(UpdateBefore);
+            //1.过滤无效数据
+            CommonHelper.FilterList(addList, deleteList);
+            CommonHelper.FilterList(updateList, deleteList);
+            //2.服务端视图实体数据验证(即用户输入的数据服务器验证)
+            foreach (var addModel in addList)
+            {
+                addModel.Validate();
+            }
+            foreach (var updateModel in updateList)
+            {
+                updateModel.Validate();
+            }
         }
-        private void AddBefore(MenuViewModel dto)
+        #endregion
+
+        #region 保存实体前的验证操作
+        private List<BeiDreamMenu> AddEntitysHandle(List<MenuViewModel> addList)
         {
-            BeiDreamMenu beiDreamMenu = dto.ToEntity(new BeiDreamMenu());
-            ValidateAddCodeRepeatAndTextRepeat(beiDreamMenu);
+            var addEntityList = DtosToEntitys(addList);
+            foreach (var addEntity in addEntityList)
+            {
+                addEntity.AddInit();
+                ValidateAddCodeRepeatAndTextRepeat(addEntity);
+            }
+            return addEntityList;
         }
         /// <summary>
         /// 验证编码和名称重复问题
@@ -283,13 +138,13 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         private void ValidateAddCodeRepeatAndTextRepeat(BeiDreamMenu beiDreamMenu)
         {
             Sql sql = new Sql();
-            sql.Where("Code=@Code", new { beiDreamMenu.Code});
-            List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
+            sql.Where("Code=@Code", new { beiDreamMenu.Code });
+            List<BeiDreamMenu> menus = this.FindByQuery(sql);
             if (menus == null || menus.Count == 0)
             {
                 Sql sqlText = new Sql();
-                sqlText.Where("Text=@Text", new {beiDreamMenu.Text });
-                List<BeiDreamMenu> menusText = UnitOfWork.Fetch<BeiDreamMenu>(sql);
+                sqlText.Where("Text=@Text", new { beiDreamMenu.Text });
+                List<BeiDreamMenu> menusText = this.FindByQuery(sqlText);
                 if (menusText == null || menusText.Count == 0)
                 {
                     return;
@@ -300,29 +155,19 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             else
                 throw new Warning(string.Format("菜单 '{0}' 已存在，请修改", "编码"));
         }
-        private void UpdateBefore(MenuViewModel dto)
+        private List<BeiDreamMenu> UpdateEntitysHandle(List<MenuViewModel> updateList)
         {
-            BeiDreamMenu beiDreamMenu = ToEntity(dto);
-            ValidateUpdateCodeRepeatAndTextRepeat(beiDreamMenu);
-            if (!ValidateVersion(beiDreamMenu))
-                throw new ConcurrencyException();
-        }
-        /// <summary>
-        /// 版本号,乐观离线锁通过为每行数据添加一个版本号来识别当前数据的版本，在获取数据时将版本号保存下来，
-        /// 更新数据时将版本号作为Where中的过滤条件，如果该记录被更新，则版本号会发生变化，所以导致更新数据时影响行数为0，
-        /// 通过引发一个并发更新异常让你了解数据已经被别人更新。
-        /// </summary>
-        //验证版本号
-        private bool ValidateVersion(BeiDreamMenu newBeiDreamMenu)
-        {
-            BeiDreamMenu oldBeiDreamMenu =
-                UnitOfWork.SingleOrDefault<BeiDreamMenu>(newBeiDreamMenu.Id);
-            if (newBeiDreamMenu.Version == null)
-                return false;
-            for (int i = 0; i < oldBeiDreamMenu.Version.Length; i++)
-                if (newBeiDreamMenu.Version[i] != oldBeiDreamMenu.Version[i])
-                    return false;
-            return true;
+            var updateEntityList = DtosToEntitys(updateList);
+            foreach (var updateEntity in updateEntityList)
+            {
+                updateEntity.UpdateInit();
+                var oldEntity = UnitOfWork.SingleOrDefault<BeiDreamMenu>(updateEntity.Id);
+                if (!CommonHelper.ValidateVersion(updateEntity, oldEntity))
+                    throw new ConcurrencyException();
+
+                ValidateUpdateCodeRepeatAndTextRepeat(updateEntity);
+            }
+            return updateEntityList;
         }
         /// <summary>
         /// 验证编码或菜单名称重复问题
@@ -331,12 +176,12 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         {
             Sql sqlCode = new Sql();
             sqlCode.Where("Code=@Code and Id<>@Id", new { Code = beiDreamMenu.Code, Id = beiDreamMenu.Id });
-            List<BeiDreamMenu> menusCode = UnitOfWork.Fetch<BeiDreamMenu>(sqlCode);
+            List<BeiDreamMenu> menusCode = this.FindByQuery(sqlCode);
             if (menusCode == null || menusCode.Count == 0)
             {
                 Sql sql = new Sql();
                 sql.Where("Text=@Text and Id<>@Id", new { Text = beiDreamMenu.Text, Id = beiDreamMenu.Id });
-                List<BeiDreamMenu> menus = UnitOfWork.Fetch<BeiDreamMenu>(sql);
+                List<BeiDreamMenu> menus = this.FindByQuery(sql);
                 if (menus == null || menus.Count == 0)
                     return;
                 else
@@ -345,32 +190,43 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
             else
                 throw new Warning(string.Format("菜单 '{0}' 已存在，请修改", "编码"));
         }
-        /// <summary>
-        /// 获取所有前台增删改的数据id
-        /// </summary>
-        /// <param name="addList"></param>
-        /// <param name="updateList"></param>
-        /// <param name="deleteList"></param>
-        /// <returns></returns>
-        private List<string> GetIds(List<BeiDreamMenu> addList, List<BeiDreamMenu> updateList, List<BeiDreamMenu> deleteList)
+        private List<BeiDreamMenu> DeleteEntitysHandle(List<MenuViewModel> deleteList)
         {
-            List<string> strList = addList.Select(addModel => addModel.Id.ToString()).ToList();
-            strList.AddRange(updateList.Select(updateModel => updateModel.Id.ToString()));
-            strList.AddRange(deleteList.Select(deleteModel => deleteModel.Id.ToString()));
-            return strList;
-        }
-        /// <summary>
-        /// 过滤无效数据
-        /// </summary>
-        private void FilterList(List<MenuViewModel> list, IEnumerable<MenuViewModel> deleteList)
-        {
-            list.Select(t => t.Id).ToList().ForEach(id =>
-            {
-                if (deleteList.Any(d => d.Id == id))
-                    list.Remove(list.Find(t => t.Id == id));
-            });
+            var deleteEntityList = DtosToEntitys(deleteList);
+            return deleteEntityList;
         }
 
+        private List<BeiDreamMenu> DtosToEntitys(List<MenuViewModel> dtoList)
+        {
+            var entityList = dtoList.Select(ToEntity).Distinct().ToList();
+            foreach (var entity in entityList)
+            {
+                entity.Validate();
+            }
+            return entityList;
+        }
+        #endregion
+
+        private void SaveData(List<BeiDreamMenu> addList, List<BeiDreamMenu> updateList,
+    List<BeiDreamMenu> deleteList)
+        {
+            UnitOfWork.Start();
+            Add(addList);
+            foreach (var updateEntity in updateList)
+            {
+                Update(updateEntity);
+            }
+            foreach (var deleteEntity in deleteList)
+            {
+                Remove(deleteEntity);
+                List<BeiDreamMenu> childrenParameters = this.GetAllChildrenParameterByPath(deleteEntity.Id, "Id");
+                if (childrenParameters.Count != 0)
+                {
+                    Remove(childrenParameters);
+                }
+            }
+            UnitOfWork.Commit();
+        }
         /// <summary>
         /// 创建新行，供前台调用
         /// </summary>
@@ -378,29 +234,15 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         /// <returns></returns>
         public MenuViewModel CreatNew(string parentId)
         {
+            var beiDreamMenu = GetMaxSortIdByParentId(parentId.ToGuidOrNull());
             MenuViewModel newDto = new MenuViewModel
             {
                 ParentId = parentId,
-                SortId = GetSortId(parentId),
+                SortId = beiDreamMenu==null?0:beiDreamMenu.SortId+1,
                 Id = Guid.NewGuid().ToString(),
                 Enabled = true
             };
             return newDto;
-        }
-        /// <summary>
-        /// 获取新增行的此层级的排序id
-        /// </summary>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
-        private int GetSortId(string parentId)
-        {
-            Sql sql = new Sql();
-            sql.Where(string.IsNullOrEmpty(parentId) ? "ParentId is null" : "ParentId=@0", parentId);
-            sql.OrderBy("SortId DESC");   //默认ASC升序，降序为DESC
-            BeiDreamMenu beiDreamMenu = UnitOfWork.FirstOrDefault<BeiDreamMenu>(sql);
-            if (beiDreamMenu == null)
-                return 0;
-            return beiDreamMenu.SortId + 1;
         }
 
         #region 数据传输对象Dto和实体Enitiy相互转化的方法
@@ -412,14 +254,6 @@ namespace BeiDream.Services.Systems.PetaPoco.Service
         {
             BeiDreamMenu model = UnitOfWork.SingleOrDefault<BeiDreamMenu>(dto.Id.ToGuid());
             return dto.ToEntity(model ?? new BeiDreamMenu());
-        }
-        /// <summary>
-        /// 转换为数据传输对象
-        /// </summary>
-        /// <param name="entity">数据传输对象</param>
-        private MenuViewModel ToDto(BeiDreamMenu entity)
-        {
-            return entity.ToDto();
         }
         #endregion
     }
